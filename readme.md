@@ -48,7 +48,7 @@
 
 1. Clona questo repository:
    ```bash
-   git clone https://github.com/tuo-username/VisualizeUrSelf.git
+   git clone https://github.com/NotSoupCarry/VisualizeUrSelf
    ```
    
 2. Naviga nella cartella del backend:
