@@ -30,7 +30,7 @@ public class Task {
     private LocalDateTime dataFine;
 
     @Column(nullable = true)
-    private boolean risolta;
+    private Boolean risolta;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
