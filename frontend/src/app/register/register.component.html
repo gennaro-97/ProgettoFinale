@@ -1,0 +1,42 @@
+<!-- register.component.html -->
+<div class="register-container">
+  <h2>Registrazione</h2>
+  <form class="register-form" action="/register" method="POST">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        required
+        minlength="3"
+        placeholder="Inserisci il tuo username"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        placeholder="Inserisci la tua email"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+        minlength="6"
+        placeholder="Inserisci la tua password"
+      />
+    </div>
+
+    <button type="submit" class="submit-button">Registrati</button>
+  </form>
+</div>
