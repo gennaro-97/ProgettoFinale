@@ -22,6 +22,14 @@ public class UtenteService {
                 .orElseThrow(() -> new RuntimeException("Utente con ID " + id + " non trovato"));
     }
 
+    public Utente findByUsername(String username) {
+        return utenteRepository.findByUsername(username);
+    }
+
+    public Utente findByEmail(String email) {
+        return utenteRepository.findByEmail(email);
+    }
+
     @Transactional
     public Utente register(Utente utente) {
         if (utente.getRuolo() == null || utente.getRuolo().name() == null) {
@@ -31,11 +39,4 @@ public class UtenteService {
         return utenteRepository.save(utente);
     }
 
-    public Utente findByUsername(String username) {
-        return utenteRepository.findByUsername(username);
-    }
-
-    public Utente findByEmail(String email) {
-        return utenteRepository.findByEmail(email);
-    }
 }
