@@ -1,14 +1,22 @@
 package com.example.backend.responses;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class AuthResponse {
-    private String token;
-    private String message;
+    private String accessToken;
+    private String tokenType = "Bearer";
+    private String username;
+    private String role;
+    
+    public AuthResponse(String accessToken, String username, String role) {
+        this.accessToken = accessToken;
+        this.username = username;
+        this.role = role;
+    }
 }
 
