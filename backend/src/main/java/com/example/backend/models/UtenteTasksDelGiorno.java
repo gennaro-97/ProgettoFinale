@@ -25,4 +25,3 @@ public class UtenteTasksDelGiorno {
     @Column(nullable = false)
     private boolean completata = false;
 }
-
