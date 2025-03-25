@@ -1,0 +1,45 @@
+<!-- userpage.component.html -->
+<div class="userpage-container">
+  <!-- Sezione sinistra (Avatar e barre di percentuali) -->
+  <div class="left-section">
+    <div class="avatar">
+      <img src="path_to_avatar_image" alt="Avatar" />
+    </div>
+
+    <div class="characteristics">
+      <div *ngFor="let characteristic of characteristics">
+        <label>{{ characteristic.name }}</label>
+        <div class="progress-bar">
+          <div
+            class="progress"
+            [style.width.%]="characteristic.percentage"
+          ></div>
+        </div>
+        <span>{{ characteristic.percentage }}%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sezione destra (Task del giorno) -->
+  <div class="right-section">
+    <h2>Task del Giorno</h2>
+    <div *ngFor="let task of tasks; let i = index" class="task">
+      <input
+        type="checkbox"
+        [(ngModel)]="task.completed"
+        (change)="updateTaskStatus(i)"
+      />
+      <span [class.completed]="task.completed">{{ task.name }}</span>
+    </div>
+
+    <!-- Form per aggiungere una nuova task -->
+    <div class="new-task">
+      <input
+        type="text"
+        [(ngModel)]="newTask"
+        placeholder="Aggiungi una nuova task"
+      />
+      <button (click)="addTask()">Aggiungi Task</button>
+    </div>
+  </div>
+</div>

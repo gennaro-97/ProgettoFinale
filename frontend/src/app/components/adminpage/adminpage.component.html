@@ -1,0 +1,45 @@
+<!-- 
+<div class="task-management-container">
+    <h2>Gestione delle Task</h2>
+  
+    
+    <div class="add-task">
+      <input 
+        type="text" 
+        [(ngModel)]="newTaskName" 
+        placeholder="Aggiungi una nuova task" 
+        class="task-input" 
+      />
+      <button (click)="addTask()" class="add-task-button">Aggiungi Task</button>
+    </div>
+  
+    <div *ngIf="tasks.length === 0" class="no-tasks-message">
+      <p>Nessuna task disponibile.</p>
+    </div>
+  
+    <div *ngIf="tasks.length > 0" class="task-list">
+      <div *ngFor="let task of tasks; let i = index" class="task-item">
+        <input type="checkbox" [(ngModel)]="task.completed" (change)="updateTaskStatus(task)" />
+        <span [class.completed]="task.completed">{{ task.name }}</span>
+  
+        
+        <button (click)="editTask(i)" class="edit-task-button">Modifica</button>
+        <button (click)="deleteTask(i)" class="delete-task-button">Elimina</button>
+      </div>
+    </div>
+  
+    
+    <div *ngIf="isEditing" class="edit-modal">
+      <div class="edit-modal-content">
+        <h3>Modifica Task</h3>
+        <input 
+          type="text" 
+          [(ngModel)]="taskToEdit.name" 
+          placeholder="Nuovo nome task" 
+          class="task-input" 
+        />
+        <button (click)="saveTaskChanges()" class="save-button">Salva</button>
+        <button (click)="cancelEditing()" class="cancel-button">Annulla</button>
+      </div>
+    </div>
+  </div> -->
