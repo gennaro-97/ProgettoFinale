@@ -28,7 +28,7 @@ public class Task {
 
     @Column(nullable = false)
     private LocalDateTime dataFine;
-
+    
     @Column(nullable = true)
     private Boolean risolta;
 
