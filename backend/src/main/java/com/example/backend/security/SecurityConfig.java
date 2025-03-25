@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.example.backend.models.Utente;
 import com.example.backend.repositories.UtenteRepository;
@@ -57,42 +59,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                // Disabilitiamo il CSRF per semplificare (in produzione valutare attentamente
-                // questa scelta)
-                .csrf(csrf -> csrf.disable())
-                // Configuriamo le autorizzazioni: le pagine di registrazione e login sono
-                // accessibili a tutti
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/home/**", "/css/**", "/js/**").permitAll()
-                        .requestMatchers("/auth/**", "/css/**", "/js/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN") // Accesso solo per admin
-                        .anyRequest().authenticated())
-                // Configuriamo il form di login
-                .formLogin(form -> form
-                        .loginPage("/login") // Pagina personalizzata di login
-                        .loginProcessingUrl("/login") // URL a cui il form invia i dati
-                        .successHandler((request, response, authentication) -> {
-                            // Controlliamo il ruolo dell'utente
-                            String redirectUrl = ""; // Redirect di default per utenti normali
-                            if (authentication.getAuthorities().stream()
-                                    .anyMatch(
-                                            grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_ADMIN"))) {
-                                redirectUrl = "/admin/taksGiornaliere"; // Redirect per admin
-                            }
-
-                            // Eseguiamo il redirect
-                            response.sendRedirect(redirectUrl);
-                        }) // Gestore di successo personalizzato per il login
-                        .permitAll())
-                // Configuriamo il logout
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
-                        .permitAll())
-                // Configuriamo il provider di autenticazione
-                .authenticationProvider(authenticationProvider());
+    http
+        .csrf(csrf -> csrf.disable())
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/api/auth/**").permitAll() // Permetti il login e la registrazione
+            .requestMatchers("/api/admin/**").hasRole("ADMIN")
+            .anyRequest().authenticated()
+        )
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .authenticationProvider(authenticationProvider())
+        .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
+    
 }
