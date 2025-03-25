@@ -1,17 +1,18 @@
 package com.example.backend.models;
 
-import com.example.backend.enums.TipoLavoro;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
+import java.util.Set;
+
+import com.example.backend.enums.TipoLavoro;
 
 @Entity
-@Table(name = "tasks")
+@Table(name = "tasks_del_giorno")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Task {
+public class TaskDelGiorno {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,19 +25,13 @@ public class Task {
     private String descrizione;
 
     @Column(nullable = false)
-    private LocalDateTime dataInizio;
-
-    @Column(nullable = false)
-    private LocalDateTime dataFine;
-    
-    @Column(nullable = true)
-    private Boolean risolta;
+    private LocalDateTime giornoDellaTask;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TipoLavoro tipoLavoro;
 
-    @ManyToOne
-    @JoinColumn(name = "utente_id", nullable = false)
-    private Utente utente;
+    // Relazione Many-to-Many con Utente tramite tabella intermedia
+    @OneToMany(mappedBy = "taskDelGiorno", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UtenteTasksDelGiorno> utentiAssegnati;
 }

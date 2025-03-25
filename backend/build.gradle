@@ -34,7 +34,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
 	// Spring Security per autenticazione e autorizzazione
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+	// implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	// Lombok per ridurre il boilerplate nel codice
 	compileOnly 'org.projectlombok:lombok'
