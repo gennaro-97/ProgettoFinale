@@ -15,7 +15,6 @@ import com.example.backend.security.JwtTokenProvider;
 import com.example.backend.services.UtenteService;
 
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import lombok.RequiredArgsConstructor;
 
