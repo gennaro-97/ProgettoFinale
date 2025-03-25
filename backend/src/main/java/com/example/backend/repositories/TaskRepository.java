@@ -8,4 +8,6 @@ import com.example.backend.models.Task;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findByUtenteId(Long utenteId);
+    List<Task> findByUtenteIdAndRisoltaTrue(Long utenteId);
+    List<Task> findByUtenteIdAndRisoltaFalse(Long utenteId);
 }

@@ -1,5 +1,7 @@
 package com.example.backend.controllers;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping("/api/tasks")
 @RequiredArgsConstructor
 public class TaskController {
 
@@ -37,10 +39,20 @@ public class TaskController {
         return ResponseEntity.ok("Task eliminato con successo!");
     }
 
-    @PatchMapping("/{id}/resolved")
-    public ResponseEntity<String> setTaskResolved(@PathVariable Long id, @RequestBody Boolean resolved) {
+    @PutMapping("/{id}/resolve")
+    public ResponseEntity<String> setTaskResolved(@PathVariable Long id, @RequestParam boolean resolved) {
         taskService.setTaskResolved(id, resolved);
-        return ResponseEntity.ok("Task aggiornato con successo!");
+        return ResponseEntity.ok("Task " + id + " aggiornata con stato: " + resolved);
+    }
+
+    @GetMapping("/resolved")
+    public List<Task> getResolvedTasks(@RequestParam Long utenteId) {
+        return taskService.getResolvedTasksByUtenteId(utenteId);
+    }
+
+    @GetMapping("/unresolved")
+    public List<Task> getUnresolvedTasks(@RequestParam Long utenteId) {
+        return taskService.getUnresolvedTasksByUtenteId(utenteId);
     }
 }
 

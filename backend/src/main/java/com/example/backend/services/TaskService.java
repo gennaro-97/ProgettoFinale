@@ -45,4 +45,12 @@ public class TaskService {
         taskRepository.save(task);
     }
 
+    public List<Task> getResolvedTasksByUtenteId(Long utenteId) {
+        return taskRepository.findByUtenteIdAndRisoltaTrue(utenteId);
+    }
+
+    public List<Task> getUnresolvedTasksByUtenteId(Long utenteId) {
+        return taskRepository.findByUtenteIdAndRisoltaFalse(utenteId);
+    }
+
 }
