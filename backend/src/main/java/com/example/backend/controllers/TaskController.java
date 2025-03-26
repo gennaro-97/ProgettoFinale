@@ -28,10 +28,15 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getTaskByUtenteId(utenteId));
     }
 
-    @PostMapping()
-    public ResponseEntity<String> saveTask(@RequestBody Task task) {
-        taskService.saveTask(task);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Task creato con successo!");
+    @PostMapping
+    public ResponseEntity<Task> createTask(@RequestBody Task task) {
+        try {
+            Task newTask = taskService.createTask(task);
+            return new ResponseEntity<>(newTask, HttpStatus.CREATED);
+        } catch (Exception e) {
+            // Se c'è un errore, come ad esempio un problema con i dati della task
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping("/{id}")

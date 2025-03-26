@@ -1,6 +1,8 @@
 package com.example.backend.models;
 
 import com.example.backend.enums.TipoLavoro;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,9 +26,11 @@ public class Task {
     private String descrizione;
 
     @Column(nullable = false)
+     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dataInizio;
 
     @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dataFine;
     
     @Column(nullable = true)

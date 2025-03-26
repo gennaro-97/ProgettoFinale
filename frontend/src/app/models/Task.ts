@@ -8,7 +8,6 @@ export interface Task {
   dataInizio: string; // LocalDateTime in Java viene rappresentato come stringa ISO
   dataFine: string;
   risolta?: Boolean; // Facoltativo perché può essere null
-  tipoLavoro: TipoLavoro;
-  utenteId: number; // ID dell'utente proprietario della task
-  utente?: Utente; // Utente proprietario della task
+  tipoLavoro?: TipoLavoro;
+  utente: Partial<Utente>; // <-- Permette di passare solo l'ID; 
 }
