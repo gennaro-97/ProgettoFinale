@@ -21,9 +21,9 @@ public class TaskService {
         return taskRepository.findByUtenteId(utenteId);
     }
 
-    @Transactional
-    public void saveTask(Task task){
-        taskRepository.save(task);
+     // Metodo per creare una nuova task
+     public Task createTask(Task task) {
+        return taskRepository.save(task);
     }
 
     @Transactional
