@@ -1,48 +1,44 @@
 <div class="datiutente-container">
-    <h1>Inserisci i tuoi dati</h1>
-  
-    <!-- Modulo per inserire o aggiornare i dati -->
-    <form (ngSubmit)="saveDatiUtente()">
-      <div class="form-group">
-        <label for="peso">Peso (kg):</label>
-        <input
-          id="peso"
-          type="number"
-          [(ngModel)]="datiUtente.peso"
-          name="peso"
-          required
-          min="1"
-          step="0.1"
-        />
-      </div>
-  
-      <div class="form-group">
-        <label for="altezza">Altezza (m):</label>
-        <input
-          id="altezza"
-          type="number"
-          [(ngModel)]="datiUtente.altezza"
-          name="altezza"
-          required
-          min="0.1"
-          step="0.01"
-        />
-      </div>
-  
-      <div class="form-group">
-        <label for="ibm">Indice di Massa Corporea (IMC):</label>
-        <input
-          id="ibm"
-          type="text"
-          [value]="datiUtente.ibm | number: '1.2-2'"
-          name="ibm"
-          readonly
-        />
-      </div>
-  
-      <button type="submit" class="btn-save">Salva Dati</button>
-    </form>
-  
-    <!-- Pulsante per aggiornare i dati -->
-    <button (click)="aggiornaDatiUtente()" class="btn-update">Aggiorna Dati</button>
+  <h1>I tuoi dati</h1>
+
+  <!-- Modulo per inserire o aggiornare i dati -->
+  <form (ngSubmit)="showAddButton ? saveDatiUtente() : aggiornaDatiUtente()">
+    <div class="form-group">
+      <label for="peso">Peso (kg):</label>
+      <input
+        id="peso"
+        type="number"
+        [(ngModel)]="datiUtente.peso"
+        name="peso"
+        required
+        min="1"
+        step="0.1"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="altezza">Altezza (m):</label>
+      <input
+        id="altezza"
+        type="number"
+        [(ngModel)]="datiUtente.altezza"
+        name="altezza"
+        required
+        min="0.1"
+        step="0.01"
+      />
+    </div>
+
+    <button type="submit" class="btn-save">
+      {{ showAddButton ? 'Aggiungi Dati' : 'Aggiorna Dati' }}
+    </button>
+  </form>
+
+  <!-- Mostra i dati salvati -->
+  <div *ngIf="!showAddButton" class="dati-salvati">
+    <p><strong>Peso:</strong> {{ datiUtente.peso }} kg</p>
+    <p><strong>Altezza:</strong> {{ datiUtente.altezza }} m</p>
+    <p><strong>Indice di Massa Corporea (IMC):</strong> {{ datiUtente.ibm | number: '1.2-2' }}</p>
   </div>
+</div>
+

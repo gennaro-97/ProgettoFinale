@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DatiUtente } from '../models/DatiUtente';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,15 @@ import { DatiUtente } from '../models/DatiUtente';
 export class DatiutentiService {
   private apiUrl = 'http://localhost:8080/api/datiUtente';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
+
+    private getAuthHeaders(): HttpHeaders {
+      const token = this.authService.getToken(); // Ottieni il token da AuthService
+      console.log(token);
+      return new HttpHeaders({
+        'Authorization': `Bearer ${token}` // Aggiungi l'header di autorizzazione
+      });
+    }
 
   /**
    * Salva i dati dell'utente.
@@ -17,7 +26,9 @@ export class DatiutentiService {
    * @returns Un Observable con i dati salvati.
    */
   saveDatiUtente(datiUtente: DatiUtente): Observable<DatiUtente> {
-    return this.http.post<DatiUtente>(`${this.apiUrl}`, datiUtente);
+    return this.http.post<DatiUtente>(`${this.apiUrl}`, datiUtente, {
+      headers: this.getAuthHeaders(),
+    });
   }
 
   /**
@@ -34,7 +45,10 @@ export class DatiutentiService {
   ): Observable<DatiUtente> {
     return this.http.put<DatiUtente>(
       `${this.apiUrl}/${utenteId}/aggiorna?peso=${peso}&altezza=${altezza}`,
-      {}
+      {},
+      {
+        headers: this.getAuthHeaders(),
+      }
     );
   }
 
@@ -44,6 +58,8 @@ export class DatiutentiService {
    * @returns Un Observable con i dati dell'utente.
    */
   getDatiUtente(utenteId: number): Observable<DatiUtente> {
-    return this.http.get<DatiUtente>(`${this.apiUrl}/${utenteId}`);
+    return this.http.get<DatiUtente>(`${this.apiUrl}/${utenteId}`, {
+      headers: this.getAuthHeaders(),
+    });
   }
 }

@@ -17,11 +17,10 @@ import { DatiUtente } from '../../models/DatiUtente';
 export class DatiutenteComponent implements OnInit {
   datiUtente: DatiUtente = {
     peso: 0,
-    altezza: 0,
-    ibm: 0,
-    idUtente: 0,
+    altezza: 0
   };
-  utenteId: number | undefined;
+  utenteId: number | undefined = undefined;
+  showAddButton: boolean = true; // Mostra il pulsante "Aggiungi Dati" di default
 
   constructor(
     private datiutentiService: DatiutentiService,
@@ -33,20 +32,22 @@ export class DatiutenteComponent implements OnInit {
     try {
       // Ottieni l'ID dell'utente autenticato
       this.utenteId = this.authService.getIdUser() ?? undefined;
-
+  
       if (!this.utenteId) {
         console.error('Utente non autenticato');
         this.router.navigate(['/login']); // Reindirizza alla pagina di login se non autenticato
         return;
       }
-
-      // Ottieni i dati dell'utente dal backend
-      const dati = await firstValueFrom(this.datiutentiService.getDatiUtente(this.utenteId));
-      if (dati) {
-        this.datiUtente = dati;
+  
+      // Carica i dati dell'utente
+      await this.getDatiUtente();
+  
+      // Nascondi il pulsante "Aggiungi Dati" se i dati sono già presenti
+      if (this.datiUtente.peso && this.datiUtente.altezza) {
+        this.showAddButton = false;
       }
     } catch (error) {
-      console.error('Errore nel caricamento dei dati utente:', error);
+      console.error('Errore durante l\'inizializzazione del componente:', error);
     }
   }
 
@@ -55,10 +56,27 @@ export class DatiutenteComponent implements OnInit {
    */
   async saveDatiUtente(): Promise<void> {
     try {
-      this.datiUtente.idUtente = this.utenteId; // Associa l'utente autenticato
-      await firstValueFrom(this.datiutentiService.saveDatiUtente(this.datiUtente));
+      // Prepara il JSON da inviare al backend
+      const datiUtentePayload = {
+        peso: this.datiUtente.peso,
+        altezza: this.datiUtente.altezza,
+        utente: {
+          id: this.utenteId, // Associa l'utente autenticato
+        },
+      };
+  
+      // Invia i dati al backend
+      await firstValueFrom(this.datiutentiService.saveDatiUtente(datiUtentePayload));
       console.log('Dati utente salvati con successo!');
-      this.router.navigate(['/userpage']); // Reindirizza alla pagina principale
+  
+      // Dopo il salvataggio, aggiorna i dati utente e nascondi il pulsante
+      const dati = await firstValueFrom(this.datiutentiService.getDatiUtente(this.utenteId!));
+      if (dati) {
+        this.datiUtente = dati;
+      }
+  
+      // Nascondi il pulsante "Aggiungi Dati"
+      this.showAddButton = false;
     } catch (error) {
       console.error('Errore nel salvataggio dei dati utente:', error);
     }
@@ -82,4 +100,25 @@ export class DatiutenteComponent implements OnInit {
       console.error('Errore nell\'aggiornamento dei dati utente:', error);
     }
   }
+
+  /**
+ * Ottiene i dati dell'utente dal backend e aggiorna il modello.
+ */
+async getDatiUtente(): Promise<void> {
+  try {
+    if (!this.utenteId) {
+      console.error('ID utente non disponibile');
+      return;
+    }
+
+    // Chiama il servizio per ottenere i dati dell'utente
+    const dati = await firstValueFrom(this.datiutentiService.getDatiUtente(this.utenteId));
+    if (dati) {
+      this.datiUtente = dati; // Aggiorna il modello con i dati ricevuti
+      console.log('Dati utente caricati con successo:', dati);
+    }
+  } catch (error) {
+    console.error('Errore nel caricamento dei dati utente:', error);
+  }
+}
 }
