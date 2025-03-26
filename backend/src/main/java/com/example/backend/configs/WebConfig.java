@@ -8,46 +8,35 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.springframework.web.filter.HiddenHttpMethodFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    @Bean
-    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
-        return new HiddenHttpMethodFilter();
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**") // Applica CORS a tutte le rotte
+                .allowedOrigins("http://localhost:4200") // Permetti l'accesso da localhost:4200
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Permetti i metodi HTTP richiesti
+                .allowedHeaders("Origin", "Content-Type", "Accept", "Authorization") // Permetti specifici headers
+                .allowCredentials(true) // Consenti le credenziali (se necessario, per esempio per i cookies o i token)
+                .exposedHeaders("Authorization"); // Espone l'intestazione Authorization al client
     }
 
+    // Filtro per CORS
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
 
-        // Abilita credenziali per le sessioni
-        config.setAllowCredentials(true);
+        config.setAllowCredentials(true); // Consenti credenziali (se necessario)
+        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200")); // Permetti l'accesso da localhost:4200
+        config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Metodi consentiti
+        config.setExposedHeaders(Arrays.asList("Access-Control-Allow-Origin", "Authorization")); // Headers esposti
 
-        // Permetti specificamente localhost:4200
-        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
-
-        // Headers consentiti - All headers
-        config.setAllowedHeaders(Arrays.asList(
-                "Origin", "Content-Type", "Accept", "Authorization",
-                "X-Requested-With", "Access-Control-Request-Method",
-                "Access-Control-Request-Headers"));
-
-        // Metodi consentiti
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-
-        // Headers esposti al client
-        config.setExposedHeaders(Arrays.asList(
-                "Access-Control-Allow-Origin",
-                "Access-Control-Allow-Credentials",
-                "X-Auth-Error"));
-
-        // Durata della cache per le preflight request (in secondi)
-        config.setMaxAge(3600L);
-
-        source.registerCorsConfiguration("/**", config);
+        source.registerCorsConfiguration("/**", config); // Applica questa configurazione a tutte le rotte
         return new CorsFilter(source);
     }
 }

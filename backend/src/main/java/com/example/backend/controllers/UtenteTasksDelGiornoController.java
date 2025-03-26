@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/utente-tasks-del-giorno")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class UtenteTasksDelGiornoController {
     private final UtenteTasksDelGiornoService utenteTasksDelGiornoService;
