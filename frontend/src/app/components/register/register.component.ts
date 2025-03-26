@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { Utente } from '../../models/Utente';
+import { Ruolo } from '../../enums/Ruolo';
 
 @Component({
   selector: 'app-register',
@@ -10,35 +14,32 @@ import { CommonModule } from '@angular/common';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
-  username: string = '';
-  email: string = '';
-  password: string = '';
-  register(event: Event): void {
-    event.preventDefault(); // Evita il ricaricamento della pagina
-    const registerData = {
+  username = '';
+  email = '';
+  password = '';
+  errorMessage = '';
+
+  constructor(private authService: AuthService, private router: Router) { }
+
+  register(event: Event) {
+    event.preventDefault(); // Evita il reload della pagina
+
+    const newUser: Utente = {
       username: this.username,
       email: this.email,
       password: this.password,
+      ruolo: Ruolo.USER
     };
-    fetch('/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+
+    this.authService.register(newUser).subscribe({
+      next: (response) => {
+        console.log('Registrazione avvenuta con successo:', response);
+        this.router.navigate(['/login']); // Redirige al login dopo la registrazione
       },
-      body: JSON.stringify(registerData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          // Logica di successo (ad esempio, reindirizza l'utente o mostra un messaggio)
-          alert('Registrazione avvenuta con successo!');
-        } else {
-          // Gestisci eventuali errori
-          alert('Errore durante la registrazione: ' + data.message);
-        }
-      })
-      .catch((error) => {
-        console.error('Error during registration:', error);
-      });
+      error: (error) => {
+        console.error('Errore nella registrazione:', error);
+        this.errorMessage = 'Errore durante la registrazione. Riprova.';
+      }
+    });
   }
 }

@@ -1,9 +1,9 @@
-import { Ruolo } from "../enums/Ruolo"; // Update the path to the correct location of 'ruolo'
+import { Ruolo } from "../enums/Ruolo";
 
 export interface Utente {
-  id?: number; // Facoltativo perché può non essere presente prima di essere salvato
+  id?: number;
   username: string;
   password: string;
   email: string;
-  role: Ruolo;
+  ruolo: Ruolo;
 }
