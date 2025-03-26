@@ -5,6 +5,8 @@ import { TaskService } from '../../services/taskservice.service';
 import { Task } from '../../models/Task';
 import { TipoLavoro } from '../../enums/TipoLavoro';
 import { firstValueFrom } from 'rxjs';
+import dayjs from 'dayjs';
+import { AuthService } from '../../services/auth.service';
 import e from 'express';
 
 @Component({
@@ -16,7 +18,7 @@ import e from 'express';
 })
 export class UserpageComponent implements OnInit {
   tasks: Task[] = [];
-  utenteId: number = 1; // Sostituisci con l'ID dell'utente loggato, ad esempio da un servizio di autenticazione
+  utenteId: number | undefined = undefined; // Modificato per gestire l'ID come numero o null
   newTask: Task = { 
     titolo: '', 
     descrizione: '', 
@@ -27,9 +29,10 @@ export class UserpageComponent implements OnInit {
   }; // Assegna l'utenteId alla task
   TipoLavoro = TipoLavoro; // Per accedere all'enum nel template
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.utenteId = this.authService.getIdUser() ?? undefined; // Ottieni l'ID dell'utente dal servizio AuthService
     this.loadTask();
   }
 
@@ -37,26 +40,26 @@ export class UserpageComponent implements OnInit {
 /** Crea una nuova task */
 async addTask(): Promise<void> {
   // Verifica se tutti i campi obbligatori sono stati riempiti
-  if (!this.newTask.titolo || !this.newTask.descrizione || !this.newTask.dataInizio || !this.newTask.dataFine || !this.newTask.tipoLavoro) {
+  if (!this.newTask.titolo || !this.newTask.descrizione || !this.newTask.dataInizio || !this.newTask.dataFine || !this.newTask.tipoLavoro || !this.utenteId) {
     console.log('Dati incompleti');
     return;
   }
 
   try {
-    const formatDateTime = (date: string, time: string = "00:00:00.000000"): string => {
-      return `${date} ${time}`; // Unisce la data con l'orario predefinito
+    // Usa dayjs per formattare la data con orario predefinito
+    const formatDateTime = (date: string, time: string = "08:00:00"): string => {
+      return dayjs(date).set('hour', parseInt(time.split(':')[0]))
+                        .set('minute', parseInt(time.split(':')[1]))
+                        .set('second', parseInt(time.split(':')[2]))
+                        .format('YYYY-MM-DD HH:mm:ss'); // Formatta come data e orario
     };
+
     // Passa l'utente come oggetto invece di un semplice ID
     const taskToSend = {
       ...this.newTask,
-      dataInizio: formatDateTime(this.newTask.dataInizio, "08:00:00.000000"), // Imposta un'ora fissa (08:00)
-      dataFine: formatDateTime(this.newTask.dataFine, "18:00:00.000000"), // Imposta un'ora fissa (18:00)
-      utente: { id: this.utenteId,
-        username: '', // Questi campi non sono necessari per la creazione
-        password: '', // ma sono richiesti dal modello Task
-        email: '', // quindi li impostiamo a stringa vuota
-        role: undefined // e ruolo a 0
-       } // Qui trasformiamo l'ID in un oggetto
+      dataInizio: formatDateTime(this.newTask.dataInizio, "08:00:00"), // Imposta un'ora fissa (08:00)
+      dataFine: formatDateTime(this.newTask.dataFine, "18:00:00"), // Imposta un'ora fissa (18:00)
+      utente: { id: this.utenteId } // Usa l'ID ottenuto dal servizio AuthService
     };
 
     await firstValueFrom(this.taskService.createTask(taskToSend)); // Aggiungi la task attraverso il servizio
@@ -73,7 +76,11 @@ async addTask(): Promise<void> {
 
   async loadTask(): Promise<void> {
     try {
-      this.tasks = await firstValueFrom(this.taskService.getTasksByUtente(this.utenteId));
+      if (this.utenteId !== undefined) {
+        this.tasks = await firstValueFrom(this.taskService.getTasksByUtente(this.utenteId));
+      } else {
+        console.error('Utente ID is undefined');
+      }
     } catch (error) {
       console.error('Errore nel recupero delle task:', error);
     }
@@ -103,7 +110,11 @@ async addTask(): Promise<void> {
   /** Ottiene tutte le task risolte */
   async getResolvedTasks(): Promise<void> {
     try {
-      this.tasks = await firstValueFrom(this.taskService.getResolvedTasks(this.utenteId));
+      if (this.utenteId !== undefined) {
+        this.tasks = await firstValueFrom(this.taskService.getResolvedTasks(this.utenteId));
+      } else {
+        console.error('Utente ID is undefined');
+      }
     } catch (error) {
       console.error('Errore nel recupero delle task risolte:', error);
     }
@@ -112,7 +123,11 @@ async addTask(): Promise<void> {
   /** Ottiene tutte le task non risolte */
   async getUnresolvedTasks(): Promise<void> {
     try {
-      this.tasks = await firstValueFrom(this.taskService.getUnresolvedTasks(this.utenteId));
+      if (this.utenteId !== undefined) {
+        this.tasks = await firstValueFrom(this.taskService.getUnresolvedTasks(this.utenteId));
+      } else {
+        console.error('Utente ID is undefined');
+      }
     } catch (error) {
       console.error('Errore nel recupero delle task non risolte:', error);
     }
