@@ -5,14 +5,15 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserpageComponent } from './components/userpage/userpage.component';
 import { AdminPageComponent } from './components/adminpage/adminpage.component';
 import { NgModule } from '@angular/core';
-import { authGuard } from './securities/guards/auth.guard';
+import { roleUserGuard } from './securities/guards/role-user.guard';
 import { roleAdminGuard } from './securities/guards/role-admin.guard';
+import { authGuard } from './securities/guards/auth.guard';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'userpage', component: UserpageComponent, canActivate: [authGuard] },
+  { path: '', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [authGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [authGuard] },
+  { path: 'userpage', component: UserpageComponent, canActivate: [roleUserGuard] },
   { path: 'adminpage', component: AdminPageComponent, canActivate: [roleAdminGuard]},
   { path: '**', redirectTo: '' } // Reindirizza alla home se la pagina non esiste
 ];
