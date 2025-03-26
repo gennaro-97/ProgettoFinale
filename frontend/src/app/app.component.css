@@ -1,10 +1,10 @@
 /* Contenitore principale */
 .index {
     width: 100%; /* Occupa tutta la larghezza dello schermo */
-    min-height: 100vh; /* Assicura che il contenitore occupi almeno l'altezza della finestra */
+    min-height: 87.6vh; /* Assicura che il contenitore occupi almeno l'altezza della finestra */
     display: flex;
     flex-direction: column; /* Disposizione verticale */
-    justify-content: flex-start; /* Allinea il contenuto in alto */
+    justify-content: center; /* Allinea il contenuto in alto */
     align-items: stretch; /* Allinea gli elementi figli per occupare tutta la larghezza */
     box-sizing: border-box; /* Include padding e bordi nella larghezza totale */
     margin: 0;
