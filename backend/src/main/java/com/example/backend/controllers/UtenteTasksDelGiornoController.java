@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/utente-tasks-del-giorno")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class UtenteTasksDelGiornoController {
     private final UtenteTasksDelGiornoService utenteTasksDelGiornoService;

@@ -21,8 +21,8 @@ import org.springframework.security.core.AuthenticationException;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthenticationManager authenticationManager;

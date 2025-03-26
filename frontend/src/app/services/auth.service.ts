@@ -12,7 +12,7 @@ import { AuthResponse } from '../models/responses/AuthResponse';
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api/auth'; // URL del backend
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /**
    * Registra un nuovo utente
@@ -29,7 +29,7 @@ export class AuthService {
   login(authRequest: AuthRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, authRequest).pipe(
       tap(response => {
-        this.saveToken(response.token);
+        this.saveToken(response.accessToken);
         this.saveUserRole(response.role);
         this.saveIdUser(response.idUser);
       }),
@@ -40,15 +40,15 @@ export class AuthService {
   /**
    * Salva il token JWT nel localStorage
    */
-  private saveToken(token: string): void {
-    localStorage.setItem('token', token);
+  private saveToken(accessToken: string): void {
+    localStorage.setItem('accessToken', accessToken);
   }
 
   /**
    * Ottiene il token JWT dal localStorage
    */
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem('accessToken');
   }
 
   /**
@@ -77,7 +77,7 @@ export class AuthService {
     const id = localStorage.getItem('idUser');
     return id ? Number(id) : null;
   }
-  
+
   /**
    * Cancella il token e il ruolo dal localStorage per effettuare il logout
    */
