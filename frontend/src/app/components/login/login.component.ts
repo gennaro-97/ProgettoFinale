@@ -34,7 +34,7 @@ export class LoginComponent {
         console.log('Login success:', response);
 
         // Controlla il ruolo dell'utente
-        if (response.ruolo === Ruolo.USER) {
+        if (response.role === Ruolo.USER) {
           this.router.navigate(['/userpage']); // Reindirizza alla userpage
         } else {
           this.router.navigate(['/dashboard']); // Reindirizza ad un'altra pagina per altri ruoli

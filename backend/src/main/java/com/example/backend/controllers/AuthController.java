@@ -60,7 +60,9 @@ public class AuthController {
                     .map(authority -> authority.getAuthority())
                     .orElse("ROLE_UNKNOWN");
 
-            return ResponseEntity.ok(new AuthResponse(jwt, loginRequest.getUsername(), role));
+            Long idUtente = utenteService.findByUsername(loginRequest.getUsername()).getId();
+
+            return ResponseEntity.ok(new AuthResponse(jwt, loginRequest.getUsername(), role, idUtente));
 
         } catch (AuthenticationException e) {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());

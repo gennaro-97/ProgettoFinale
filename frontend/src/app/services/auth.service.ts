@@ -30,7 +30,8 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, authRequest).pipe(
       tap(response => {
         this.saveToken(response.token);
-        this.saveUserRole(response.ruolo);
+        this.saveUserRole(response.role);
+        this.saveIdUser(response.idUser);
       }),
       catchError(this.handleError)
     );
@@ -64,6 +65,19 @@ export class AuthService {
     return localStorage.getItem('role');
   }
 
+
+  private saveIdUser(idUser: number): void {
+    localStorage.setItem('idUser', idUser.toString());
+  }
+
+  /**
+   * Ottiene il ruolo dell'utente
+   */
+  getIdUser(): number | null {
+    const id = localStorage.getItem('idUser');
+    return id ? Number(id) : null;
+  }
+  
   /**
    * Cancella il token e il ruolo dal localStorage per effettuare il logout
    */

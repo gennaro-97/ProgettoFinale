@@ -1,6 +1,9 @@
+import { Ruolo } from "../../enums/Ruolo";
+
 export interface AuthResponse {
     token: string;
     username: string;
-    ruolo: string;
+    role: Ruolo;
+    idUser: number;
   }
   
