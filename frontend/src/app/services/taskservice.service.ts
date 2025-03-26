@@ -55,7 +55,6 @@ export class TaskService {
   /** Crea l'intestazione di autorizzazione con il Bearer Token */
   private createAuthorizationHeaders(): HttpHeaders {
     const token = this.authService.getToken(); // Ottieni il token dal servizio di autenticazione
-    console.log(token);
     return new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });

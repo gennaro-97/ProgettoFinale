@@ -74,7 +74,6 @@ async addTask(): Promise<void> {
   async loadTask(): Promise<void> {
     try {
       this.tasks = await firstValueFrom(this.taskService.getTasksByUtente(this.utenteId));
-      console.log(this.tasks);
     } catch (error) {
       console.error('Errore nel recupero delle task:', error);
     }
