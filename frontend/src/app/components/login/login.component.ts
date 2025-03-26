@@ -37,7 +37,7 @@ export class LoginComponent {
         if (response.role === Ruolo.USER) {
           this.router.navigate(['/userpage']); // Reindirizza alla userpage
         } else {
-          this.router.navigate(['/dashboard']); // Reindirizza ad un'altra pagina per altri ruoli
+          this.router.navigate(['/adminpage']); // Reindirizza ad un'altra pagina per altri ruoli
         }
       },
       error: (error) => {
