@@ -82,8 +82,7 @@ export class AuthService {
    * Cancella il token e il ruolo dal localStorage per effettuare il logout
    */
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
+    localStorage.clear(); // Rimuove tutti gli item dal localStorage
   }
 
   /**

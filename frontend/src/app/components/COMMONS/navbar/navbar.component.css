@@ -1,0 +1,62 @@
+/* Impostazioni di base per il layout */
+.navbar {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  .logo {
+    padding: 15px;
+    cursor: pointer;
+    background-color: #121212; /* Sfondo scuro per il logo */
+  }
+  
+  .logo-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+  
+  /* Sidebar che inizialmente è nascosta e si espande quando è aperta */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Nasconde la sidebar inizialmente */
+    width: 250px;
+    height: 100%;
+    background-color: #1d1c1c; /* Colore di sfondo della sidebar */
+    color: white;
+    transition: all 0.3s ease; /* Animazione per l'apertura/chiusura */
+    padding-top: 50px;
+  }
+  
+  .sidebar.open {
+    left: 0; /* Quando la sidebar è aperta, si sposta a sinistra */
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar ul li {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+  }
+  
+  .sidebar ul li a:hover {
+    background-color: #333; /* Colore di hover */
+    border-radius: 5px;
+  }
+  

@@ -1,0 +1,21 @@
+<div *ngIf="isAuthenticated"> <!-- Mostra la navbar solo se l'utente è autenticato -->
+  <div class="navbar">
+    <!-- Logo che apre la sidebar -->
+    <div class="logo" (click)="toggleSidebar()">
+      <img src="favicon.ico" alt="Logo" class="logo-img" />
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" [class.open]="isSidebarOpen">
+      <ul>
+        <li><button (click)="isSidebarOpen = false">X</button></li>
+        <li><button (click)="onLoginClick()">Login</button></li>
+        <li><button (click)="onRegisterClick()">Register</button></li>
+        <li><button (click)="onUserPageClick()">User Page</button></li>
+        <li><button (click)="onAdminPageClick()">Admin Page</button></li>
+        <li><button (click)="onLogoutClick()">Logout</button></li>
+
+      </ul>
+    </div>
+  </div>
+</div>
