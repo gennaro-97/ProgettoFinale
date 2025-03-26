@@ -15,7 +15,6 @@ export const routes: Routes = [
   { path: 'userpage', component: UserpageComponent, canActivate: [authGuard] },
   { path: 'adminpage', component: AdminPageComponent, canActivate: [roleAdminGuard]},
   { path: '**', redirectTo: '' } // Reindirizza alla home se la pagina non esiste
-
 ];
 
 @NgModule({
