@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/admin")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class AdminController {
     private final TaskDelGiornoService taskDelGiornoService;

@@ -6,4 +6,3 @@ export interface AuthResponse {
   role: Ruolo;
   idUser: number;
 }
-  
