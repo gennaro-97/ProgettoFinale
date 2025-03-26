@@ -8,40 +8,42 @@ import { DatiUtente } from '../models/DatiUtente';
 })
 export class DatiutentiService {
   private apiUrl = 'http://localhost:8080/api/datiUtente';
+
   constructor(private http: HttpClient) {}
 
+  /**
+   * Salva i dati dell'utente.
+   * @param datiUtente Oggetto contenente i dati dell'utente.
+   * @returns Un Observable con i dati salvati.
+   */
   saveDatiUtente(datiUtente: DatiUtente): Observable<DatiUtente> {
     return this.http.post<DatiUtente>(`${this.apiUrl}`, datiUtente);
   }
 
+  /**
+   * Aggiorna i dati dell'utente.
+   * @param utenteId ID dell'utente da aggiornare.
+   * @param peso Nuovo peso dell'utente.
+   * @param altezza Nuova altezza dell'utente.
+   * @returns Un Observable con i dati aggiornati.
+   */
   aggiornaDatiUtente(
     utenteId: number,
-    nuovoPeso: number,
-    nuovaAltezza: number
+    peso: number,
+    altezza: number
   ): Observable<DatiUtente> {
-    const datiUtente: DatiUtente = {
-      peso: nuovoPeso,
-      altezza: nuovaAltezza,
-      ibm: this.calcolaIbm(nuovoPeso, nuovaAltezza),
-      idUtente: utenteId,
-    };
     return this.http.put<DatiUtente>(
-      `${this.apiUrl}/aggiorna/${utenteId}`,
-      datiUtente
+      `${this.apiUrl}/${utenteId}/aggiorna?peso=${peso}&altezza=${altezza}`,
+      {}
     );
   }
 
-  // Metodo per ottenere i dati dell'utente tramite il suo ID
+  /**
+   * Ottiene i dati dell'utente tramite il suo ID.
+   * @param utenteId ID dell'utente.
+   * @returns Un Observable con i dati dell'utente.
+   */
   getDatiUtente(utenteId: number): Observable<DatiUtente> {
-    return this.http.get<DatiUtente>(`${this.apiUrl}/utente/${utenteId}`);
-  }
-
-  // Metodo per calcolare l'IMC (IBM)
-  private calcolaIbm(peso: number, altezza: number): number {
-    if (altezza > 0) {
-      return peso / (altezza * altezza);
-    } else {
-      return 0;
-    }
+    return this.http.get<DatiUtente>(`${this.apiUrl}/${utenteId}`);
   }
 }

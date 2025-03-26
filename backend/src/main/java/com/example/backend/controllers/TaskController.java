@@ -19,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 public class TaskController {
 
     private final TaskService taskService;
-
     @GetMapping()
     public ResponseEntity<?> getAll(@RequestParam Long utenteId) {
         if (utenteId == null) {
