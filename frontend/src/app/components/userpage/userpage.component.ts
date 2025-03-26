@@ -7,7 +7,6 @@ import { TipoLavoro } from '../../enums/TipoLavoro';
 import { firstValueFrom } from 'rxjs';
 import dayjs from 'dayjs';
 import { AuthService } from '../../services/auth.service';
-import e from 'express';
 
 @Component({
   selector: 'app-userpage',
@@ -28,6 +27,28 @@ export class UserpageComponent implements OnInit {
     utente: { id: this.utenteId } 
   }; // Assegna l'utenteId alla task
   TipoLavoro = TipoLavoro; // Per accedere all'enum nel template
+
+  get progressPercentage(): string {
+    const resolvedTasks = this.tasks.filter(task => task.risolta).length;
+    const totalTasks = this.tasks.length;
+    return totalTasks > 0 ? (resolvedTasks / totalTasks) * 100 + '%' : '0%';
+  }
+
+  get completedTasksCount(): number {
+    return this.tasks.filter(task => task.risolta).length;
+  }
+
+  get totalTasksCount(): number {
+    return this.tasks.length;
+  }
+
+  get resolvedTasks(): Task[] {
+    return this.tasks.filter(task => task.risolta);
+  }
+
+  get unresolvedTasks(): Task[] {
+    return this.tasks.filter(task => !task.risolta);
+  }
 
   constructor(private taskService: TaskService, private authService: AuthService) {}
 
@@ -51,7 +72,7 @@ async addTask(): Promise<void> {
       return dayjs(date).set('hour', parseInt(time.split(':')[0]))
                         .set('minute', parseInt(time.split(':')[1]))
                         .set('second', parseInt(time.split(':')[2]))
-                        .format('YYYY-MM-DD HH:mm:ss'); // Formatta come data e orario
+                        .format('YYYY-MM-DDTHH:mm:ss'); // Formatta come data e orario
     };
 
     // Passa l'utente come oggetto invece di un semplice ID
@@ -62,6 +83,7 @@ async addTask(): Promise<void> {
       utente: { id: this.utenteId } // Usa l'ID ottenuto dal servizio AuthService
     };
 
+    console.log(taskToSend);
     await firstValueFrom(this.taskService.createTask(taskToSend)); // Aggiungi la task attraverso il servizio
     this.loadTask(); // Ricarica la lista delle task
 
@@ -91,10 +113,10 @@ async addTask(): Promise<void> {
   async deleteTask(id: number): Promise<void> {
     try {
       await firstValueFrom(this.taskService.deleteTask(id)); // Elimina la task
-      this.loadTask();
     } catch (error) {
       console.error('Errore nell\'eliminazione della task:', error);
     }
+    this.loadTask(); // Ricarica la lista delle task
   }
 
   /** Imposta una task come risolta o non risolta */

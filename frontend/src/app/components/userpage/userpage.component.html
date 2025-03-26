@@ -1,102 +1,80 @@
-<div class="container">
-  <h1>Gestione Task</h1>
+<div class="userpage-container">
+  <!-- Colonna sinistra -->
+  <div class="left-column">
+    <h1>Gestione Task</h1>
 
-  <!-- Form per aggiungere una nuova task -->
-  <form (ngSubmit)="addTask()" #taskForm="ngForm">
-    <div class="form-group">
-      <label for="titolo">Titolo</label>
-      <input
-        type="text"
-        id="titolo"
-        class="form-control"
-        [(ngModel)]="newTask.titolo"
-        name="titolo"
-        required
-      />
+    <!-- Barra di progresso -->
+    <section class="progress-bar-section">
+      <h2>Progresso</h2>
+      <div class="progress-bar">
+        <div
+          class="progress-bar-fill"
+          [style.width]="progressPercentage">
+        </div>
+      </div>
+      <p>{{ completedTasksCount }} completate su {{ totalTasksCount }} totali</p>
+    </section>
+
+    <!-- Sezione per aggiungere una nuova task -->
+    <section class="add-task-section">
+      <h2>Aggiungi una nuova task</h2>
+      <form (ngSubmit)="addTask()">
+        <label for="titolo">Titolo:</label>
+        <input id="titolo" [(ngModel)]="newTask.titolo" name="titolo" required />
+
+        <label for="descrizione">Descrizione:</label>
+        <textarea id="descrizione" [(ngModel)]="newTask.descrizione" name="descrizione" required></textarea>
+
+        <label for="dataInizio">Data Inizio:</label>
+        <input id="dataInizio" type="date" [(ngModel)]="newTask.dataInizio" name="dataInizio" required />
+
+        <label for="dataFine">Data Fine:</label>
+        <input id="dataFine" type="date" [(ngModel)]="newTask.dataFine" name="dataFine" required />
+
+        <label for="tipoLavoro">Tipo di Lavoro:</label>
+        <select id="tipoLavoro" [(ngModel)]="newTask.tipoLavoro" name="tipoLavoro" required>
+          <option *ngFor="let tipo of TipoLavoro | keyvalue" [value]="tipo.key">{{ tipo.value }}</option>
+        </select>
+
+        <button type="submit">Aggiungi Task</button>
+      </form>
+    </section>
+
+    <!-- Sezioni per task risolte e non risolte -->
+    <div class="tasks-summary">
+      <section class="resolved-tasks-section">
+        <h2>Task Risolte</h2>
+        <div *ngFor="let task of resolvedTasks" class="task-item">
+          <h3>{{ task.titolo }}</h3>
+          <p>{{ task.descrizione }}</p>
+        </div>
+      </section>
+
+      <section class="unresolved-tasks-section">
+        <h2>Task Non Risolte</h2>
+        <div *ngFor="let task of unresolvedTasks" class="task-item">
+          <h3>{{ task.titolo }}</h3>
+          <p>{{ task.descrizione }}</p>
+        </div>
+      </section>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="descrizione">Descrizione</label>
-      <textarea
-        id="descrizione"
-        class="form-control"
-        [(ngModel)]="newTask.descrizione"
-        name="descrizione"
-        required
-      ></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="dataInizio">Data Inizio</label>
-      <input
-        type="date"
-        id="dataInizio"
-        class="form-control"
-        [(ngModel)]="newTask.dataInizio"
-        name="dataInizio"
-        required
-      />
-    </div>
-    
-    <div class="form-group">
-      <label for="dataFine">Data Fine</label>
-      <input
-        type="date"
-        id="dataFine"
-        class="form-control"
-        [(ngModel)]="newTask.dataFine"
-        name="dataFine"
-        required
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="tipoLavoro">Tipo di Lavoro</label>
-      <select
-        id="tipoLavoro"
-        class="form-control"
-        [(ngModel)]="newTask.tipoLavoro"
-        name="tipoLavoro"
-        required
-      >
-        <option [value]="TipoLavoro.MENTALE">Mentale</option>
-        <option [value]="TipoLavoro.FISICO">Fisico</option>
-      </select>
-    </div>
-
-    <button type="submit" class="btn btn-primary">
-      Aggiungi Task
-    </button>
-  </form>
-
-  <hr />
-
-  <!-- Elenco delle task -->
-  <h2>Elenco Task</h2>
-  <ul class="list-group">
-    <li
-      class="list-group-item"
-      *ngFor="let task of tasks"
-    >
-      <h5>{{ task.titolo }}</h5>
-      <p>{{ task.descrizione }}</p>
-      <p><strong>Data Inizio:</strong> {{ task.dataInizio }}</p>
-      <p><strong>Data Fine:</strong> {{ task.dataFine }}</p>
-      <p><strong>Tipo di Lavoro:</strong> {{ task.tipoLavoro }}</p>
-      <p><strong>Stato:</strong>   {{ task.risolta === true ? 'Risolto' : (task.risolta === false ? 'Non Risolto' : 'Stato Non Definito') }}</p>
-      <button
-        class="btn btn-danger btn-sm"
-        (click)="deleteTask(task.id!)"
-      >
-        Elimina
-      </button>
-      <button
-        class="btn btn-secondary btn-sm"
-        (click)="toggleTaskResolved(task.id!, !task.risolta)"
-      >
-        {{ task.risolta ? 'Segna come Non Risolto' : 'Segna come Risolto' }}
-      </button>
-    </li>
-  </ul>
+  <!-- Colonna destra -->
+  <div class="right-column">
+    <section class="tasks-section">
+      <h2>Le tue Task</h2>
+      <div *ngFor="let task of tasks" class="task-item">
+        <h3>{{ task.titolo }}</h3>
+        <p>{{ task.descrizione }}</p>
+        <p><strong>Inizio:</strong> {{ task.dataInizio }}</p>
+        <p><strong>Fine:</strong> {{ task.dataFine }}</p>
+        <p><strong>Tipo:</strong> {{ task.tipoLavoro }}</p>
+        <button (click)="deleteTask(task.id!)">Elimina</button>
+        <button (click)="toggleTaskResolved(task.id!, true)">Completato</button>
+        <button (click)="toggleTaskResolved(task.id!, false)">Fallito</button>
+      </div>
+    </section>
+  </div>
 </div>
 
