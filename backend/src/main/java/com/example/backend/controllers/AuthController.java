@@ -1,5 +1,7 @@
 package com.example.backend.controllers;
 
+import java.util.Map;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -19,6 +21,7 @@ import org.springframework.security.core.AuthenticationException;
 import lombok.RequiredArgsConstructor;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
@@ -35,9 +38,9 @@ public class AuthController {
     public ResponseEntity<?> register(@RequestBody Utente utente) {
         try {
             utenteService.register(utente);
-            return ResponseEntity.ok("Registrazione completata con successo!");
+            return ResponseEntity.ok(Map.of("message", "Registrazione completata con successo!"));
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
         }
     }
 
@@ -57,7 +60,9 @@ public class AuthController {
                     .map(authority -> authority.getAuthority())
                     .orElse("ROLE_UNKNOWN");
 
-            return ResponseEntity.ok(new AuthResponse(jwt, loginRequest.getUsername(), role));
+            Long idUtente = utenteService.findByUsername(loginRequest.getUsername()).getId();
+
+            return ResponseEntity.ok(new AuthResponse(jwt, loginRequest.getUsername(), role, idUtente));
 
         } catch (AuthenticationException e) {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
