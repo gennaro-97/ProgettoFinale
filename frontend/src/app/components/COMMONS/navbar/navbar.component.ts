@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Ruolo } from '../../../enums/Ruolo';
 
 @Component({
   selector: 'app-navbar',
@@ -14,16 +15,30 @@ import { Subscription } from 'rxjs';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isSidebarOpen = false;
-  isAuthenticated: boolean = false; // Variabile per la visibilità della navbar
+  isAuthenticated: boolean = false; 
+  isRoleUser: boolean = false;
+  isRoleAdmin: boolean = false;
+
   private routerSubscription: Subscription | undefined;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     // Sottoscrizione agli eventi di navigazione per aggiornare l'autenticazione
     this.routerSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.isAuthenticated = this.authService.isAuthenticated();
+
+        this.isRoleUser = false;
+        this.isRoleAdmin = false;
+
+        const userRole = this.authService.getUserRole();
+
+        if (userRole === Ruolo.ADMIN) {
+          this.isRoleAdmin = true;
+        } else if (userRole === Ruolo.USER) {
+          this.isRoleUser = true;
+        }
       }
     });
   }
@@ -39,29 +54,33 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
-  onLoginClick() {
+  onProfileClick() {
     this.isSidebarOpen = false;
-    this.router.navigate(['/login']); // Naviga programmaticamente al login
+    this.router.navigate(['/userprofile']);
   }
 
-  onRegisterClick() {
+  onTasksClick() {
     this.isSidebarOpen = false;
-    this.router.navigate(['/register']); // Naviga programmaticamente al register
+    this.router.navigate(['/userpage']);
   }
 
-  onUserPageClick() {
+  onTasksDelGiornoClick() {
     this.isSidebarOpen = false;
-    this.router.navigate(['/userpage']); // Naviga programmaticamente alla user page
+    this.router.navigate(['/adminpage']);
   }
 
-  onAdminPageClick() {
-    this.isSidebarOpen = false;
-    this.router.navigate(['/adminpage']); // Naviga programmaticamente alla admin page
-  }
-
-  onLogoutClick(){
+  onLogoutClick() {
     this.authService.logout();
     this.isSidebarOpen = false;
-    this.router.navigate(['/']); // Naviga programmaticamente alla admin page
+
+    // Reset variabili di ruolo
+    this.isAuthenticated = false;
+    this.isRoleUser = false;
+    this.isRoleAdmin = false;
+
+    this.router.navigate(['/']).then(() => {
+      window.location.reload(); // Forza l'aggiornamento della navbar
+    });
   }
+
 }

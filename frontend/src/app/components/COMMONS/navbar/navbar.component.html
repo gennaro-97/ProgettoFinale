@@ -9,12 +9,13 @@
     <div class="sidebar" [class.open]="isSidebarOpen">
       <ul>
         <li><button (click)="isSidebarOpen = false">X</button></li>
-        <li><button (click)="onLoginClick()">Login</button></li>
-        <li><button (click)="onRegisterClick()">Register</button></li>
-        <li><button (click)="onUserPageClick()">User Page</button></li>
-        <li><button (click)="onAdminPageClick()">Admin Page</button></li>
-        <li><button (click)="onLogoutClick()">Logout</button></li>
+        <li *ngIf="isRoleUser"><button (click)="onProfileClick()">Profilo</button></li>
+        <li *ngIf="isRoleUser"><button >Tasks Del Giorno</button></li>
+        <li *ngIf="isRoleUser"><button (click)="onTasksClick()">Le Tue Tasks</button></li>
 
+        <li *ngIf="isRoleAdmin"><button (click)="onTasksDelGiornoClick()">Gestisci Tasks del Giorno</button></li>
+
+        <li><button (click)="onLogoutClick()">Logout</button></li>
       </ul>
     </div>
   </div>
