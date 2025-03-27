@@ -2,6 +2,7 @@ package com.example.backend.services;
 
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +19,10 @@ public class TaskDelGiornoService {
 
     public List<TaskDelGiorno> getAllTasksDelGiorno(){
         return taskDelGiornoRepository.findAll();
+    }
+
+    public List<TaskDelGiorno> getTasksDelGiornoByDate(LocalDateTime data){
+        return taskDelGiornoRepository.findByGiornoDellaTask(data);
     }
 
     @Transactional

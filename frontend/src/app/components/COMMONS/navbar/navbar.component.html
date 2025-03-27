@@ -10,7 +10,7 @@
       <ul>
         <li><button (click)="isSidebarOpen = false">X</button></li>
         <li *ngIf="isRoleUser"><button (click)="onProfileClick()">Profilo</button></li>
-        <li *ngIf="isRoleUser"><button >Tasks Del Giorno</button></li>
+        <li *ngIf="isRoleUser"><button (click)="onUserTaskDelGiornoClick()">Tasks Del Giorno</button></li>
         <li *ngIf="isRoleUser"><button (click)="onTasksClick()">Le Tue Tasks</button></li>
 
         <li *ngIf="isRoleAdmin"><button (click)="onTasksDelGiornoClick()">Gestisci Tasks del Giorno</button></li>

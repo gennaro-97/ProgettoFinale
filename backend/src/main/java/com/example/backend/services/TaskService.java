@@ -1,5 +1,6 @@
 package com.example.backend.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,5 +53,6 @@ public class TaskService {
     public List<Task> getUnresolvedTasksByUtenteId(Long utenteId) {
         return taskRepository.findByUtenteIdAndRisoltaFalse(utenteId);
     }
+
 
 }

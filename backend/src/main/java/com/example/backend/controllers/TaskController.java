@@ -1,5 +1,6 @@
 package com.example.backend.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,7 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getTaskByUtenteId(utenteId));
     }
 
+    @SuppressWarnings("null")
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
         try {
@@ -59,5 +61,6 @@ public class TaskController {
     public List<Task> getUnresolvedTasks(@RequestParam Long utenteId) {
         return taskService.getUnresolvedTasksByUtenteId(utenteId);
     }
+
 }
 

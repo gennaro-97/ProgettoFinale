@@ -7,8 +7,8 @@
     <input type="text" [(ngModel)]="newTask.descrizione" name="descrizione" placeholder="Descrizione" required>
     <input type="date" [(ngModel)]="newTask.giornoDellaTask" name="giornoDellaTask" required>
     <select [(ngModel)]="newTask.tipoLavoro" name="tipoLavoro">
-      <option value="GENERALE">Generale</option>
-      <option value="URGENTE">Urgente</option>
+      <option value="FISICO">Fisico</option>
+      <option value="MENTALE">Mentale</option>
     </select>
     <button type="submit">Aggiungi Task</button>
   </form>
