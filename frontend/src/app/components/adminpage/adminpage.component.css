@@ -126,8 +126,7 @@ select {
   height: 45px;
   font-size: 16px;
   padding: 0 20px;
-  background: transparent;
+  background: black;
   border: 1px solid #fff;
   outline: none;
-  color: #fff;
 }
