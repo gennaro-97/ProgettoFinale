@@ -1,0 +1,113 @@
+
+
+.nav {
+  text-align: center;
+  width: 100%;
+  position: relative;
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.titolo-pagina h1 {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: slideInFromTop 1s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+.description {
+  font-size: 1.2rem;
+  color: #cccccc;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 600px;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: slideInFromLeft 1s ease-out forwards;
+  animation-delay: 0.8s;
+}
+
+nav.login button {
+  margin: 10px;
+  padding: 15px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid #ffffff;
+  border-radius: 25px;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInButtons 1s ease-out forwards;
+  animation-delay: 1.2s;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav.login button:hover {
+  background-color: #ffffff;
+  color: #121212;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes logoAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInButtons {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

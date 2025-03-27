@@ -1,0 +1,43 @@
+.footer {
+    background-color: #1d1c1c;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%; /* Occupa tutta la larghezza dello schermo */
+    position: relative; /* Assicura che il footer rimanga nel flusso del layout */
+    box-sizing: border-box; /* Include padding e bordi nella larghezza totale */
+    max-height: 20vh;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto; /* Centra il contenuto del footer */
+}
+
+.footer p {
+    font-size: 14px;
+}
+
+.footer-links {
+    margin-top: 10px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.footer-links ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-links ul li a:hover {
+    text-decoration: underline;
+}

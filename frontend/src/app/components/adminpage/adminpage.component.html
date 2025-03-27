@@ -1,0 +1,26 @@
+<div class="container">
+  <h2>Gestione Task del Giorno</h2>
+
+  <!-- Form per aggiungere una nuova Task -->
+  <form (submit)="addTask(); $event.preventDefault()">
+    <input type="text" [(ngModel)]="newTask.titolo" name="titolo" placeholder="Titolo" required>
+    <input type="text" [(ngModel)]="newTask.descrizione" name="descrizione" placeholder="Descrizione" required>
+    <input type="date" [(ngModel)]="newTask.giornoDellaTask" name="giornoDellaTask" required>
+    <select [(ngModel)]="newTask.tipoLavoro" name="tipoLavoro">
+      <option value="FISICO">Fisico</option>
+      <option value="MENTALE">Mentale</option>
+    </select>
+    <button type="submit">Aggiungi Task</button>
+  </form>
+
+  <!-- Errore -->
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+  <!-- Lista delle Task -->
+  <ul>
+    <li *ngFor="let task of tasks">
+      <strong>{{ task.titolo }}</strong> - {{ task.descrizione }} ({{ task.tipoLavoro }})
+      <button (click)="deleteTask(task.id!)">Elimina</button>
+    </li>
+  </ul>
+</div>

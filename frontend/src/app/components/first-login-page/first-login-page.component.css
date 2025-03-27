@@ -1,0 +1,27 @@
+span{
+    color: green;
+}
+
+/* Animazione fade-in con traslazione */
+@keyframes fadeInSlide {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Prima comparsa del contenitore del messaggio */
+.first-login-container {
+    text-align: center;
+    animation: fadeInSlide 1s ease-out forwards;
+}
+
+/* Delay per il form, appare dopo */
+.datiutente {
+    opacity: 0; /* Nasconde inizialmente */
+    animation: fadeInSlide 1s ease-out 0.5s forwards;
+}

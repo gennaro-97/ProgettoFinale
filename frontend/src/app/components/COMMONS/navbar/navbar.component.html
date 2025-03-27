@@ -1,0 +1,37 @@
+
+
+<div *ngIf="isAuthenticated">
+  <div class="navbar">
+    <div class="logo" (click)="toggleSidebar()">
+      <img src="/assets/images/Logo.svg" alt="Logo" class="logo-img" />
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" [class.open]="isSidebarOpen">
+      <ul>
+        <li>
+          <button class="btn-close" (click)="isSidebarOpen = false">X</button>
+        </li>
+        <li *ngIf="isRoleUser">
+          <button class="btn" (click)="onProfileClick()">Profilo</button>
+        </li>
+        <li *ngIf="isRoleUser">
+          <button class="btn" (click)="onUserTaskDelGiornoClick()">Tasks Del Giorno</button>
+        </li>
+        <li *ngIf="isRoleUser">
+          <button class="btn" (click)="onTasksClick()">Le Tue Tasks</button>
+        </li>
+
+        <li *ngIf="isRoleAdmin">
+          <button class="btn" (click)="onTasksDelGiornoClick()">
+            Gestisci Tasks del Giorno
+          </button>
+        </li>
+
+        <li>
+          <button class="btn" (click)="onLogoutClick()">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

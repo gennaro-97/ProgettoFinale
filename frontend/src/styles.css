@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: "Poppins", sans-serif;
+    background-color: #121212;
+    color: white;
+   
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }

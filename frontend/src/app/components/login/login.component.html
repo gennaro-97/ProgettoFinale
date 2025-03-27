@@ -1,0 +1,48 @@
+<div class="wrapper">
+  <div class="form-header">
+    <div class="titles">
+      <div class="title-login">Login</div>
+    </div>
+  </div>
+  <form class="login-form" (submit)="login($event)">
+    <div class="input-box">
+      <input
+        type="text"
+        class="input-field"
+        [(ngModel)]="username"
+        id="username"
+        [ngModelOptions]="{standalone: true}"  
+        required
+      />
+      <label for="username" class="label">Username</label>
+      <i class="bx bx-user-circle icon"></i>
+    </div>
+
+    <div class="input-box">
+      <input
+        type="password"
+        class="input-field"
+        [(ngModel)]="password"
+        id="password"
+        [ngModelOptions]="{standalone: true}"  
+        required
+      />
+      <label for="password" class="label">Password</label>
+      <i class="bx bxs-lock-alt icon"></i>
+    </div>
+
+    <div class="form-cols">
+      <div class="col-1"></div>
+    </div>
+
+    <div class="input-box">
+      <button class="btn-submit" id="signInBtn" type="submit">
+        Accedi <i class="bx bx-log-in-circle"></i>
+      </button>
+    </div>
+
+    <div class="switch-form">
+      <span>Non hai un account? <a href="/register">Registrati</a></span>
+    </div>
+  </form>
+</div>

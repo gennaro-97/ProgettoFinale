@@ -1,0 +1,251 @@
+.userpage-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 90%; /* Occupa tutta la larghezza disponibile */
+  max-width: 100vw; /* Assicura che non ci siano limiti alla larghezza */
+  padding: 20px;
+  background-color: #141414;
+  color: #efe9e9;
+  border-radius: 10px;
+  box-sizing: border-box; /* Include padding e bordi nella larghezza totale */
+  gap: 20px; /* Spazio tra le colonne */
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+/* Colonna sinistra */
+.left-column {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Colonna destra */
+.right-column {
+  width: 30%;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+/* Titoli */
+h1,
+h2 {
+  color: var(--text-color);
+  margin-bottom: 10px;
+}
+
+/* Barra di progresso */
+.progress-bar-section {
+  background-color: #000;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #000000;
+  border-radius: 10px;
+  overflow: hidden; /* Nasconde gli elementi che escono dai bordi */
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    red,
+    yellow,
+    green
+  ); /* Gradiente da rosso a verde */
+  transition: width 0.5s ease, background-position 0.5s ease; /* Transizione fluida */
+  background-size: 100%; /* Aumenta la dimensione del gradiente per creare l'effetto fluido */
+  background-position: 0% 0%; /* Posizione iniziale del gradiente */
+  border-radius: 10px;
+}
+
+/* Sezione aggiungi task */
+.add-task-section {
+  background-color: #000;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-task-section h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #e7e1e1;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #343131;
+  color: #dccece;
+  font-size: 14px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #555;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #141414;
+  outline: none;
+}
+
+textarea {
+  resize: none;
+}
+
+button.btn-add-task {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0d0e0d;
+  color: #fff;
+  border: 1px solid #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.btn-add-task:hover {
+  background-color: #318e44;
+}
+
+/* Sezioni task risolti e non risolti */
+.tasks-summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.resolved-tasks-section,
+.unresolved-tasks-section {
+  width: 48%;
+  background-color: #000;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.task-item {
+  background-color: rgba(36, 35, 35, 0.7);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-item h3 {
+  margin: 0 0 5px;
+  font-size: 16px;
+  color: #e7dede;
+}
+
+.task-item p {
+  margin: 0 0 5px;
+  font-size: 14px;
+  color: #e6dddd;
+}
+
+/* Pulsanti task */
+button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+button:disabled {
+  background-color: #444;
+  cursor: not-allowed;
+}
+
+.delete-task {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.delete-task:hover {
+  background-color: #cc0000;
+}
+
+.complete-task {
+  background-color: #90ee90;
+  color: black;
+}
+
+.complete-task:hover {
+  background-color: #77dd77;
+}
+
+.fail-task {
+  background-color: #ff9999;
+  color: black;
+}
+
+.fail-task:hover {
+  background-color: #ff7777;
+}
+
+/* Sezione task principali */
+.tasks-section {
+  background-color: #000;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.tasks-section h2 {
+  font-size: 20px;
+  text-align: center;
+}
+
+.progress-images {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.progress-images img {
+  max-width: 50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  height: auto;
+}

@@ -1,0 +1,151 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(246, 247, 249);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(0, 0, 0);
+}
+
+.wrapper {
+  position: relative;
+  width: 430px;
+  height: 500px;
+  background-color: rgb(18, 17, 17);
+  border-radius: 15px;
+  padding: 120px 32px 64px;
+  margin-left: 30vw;
+  border: 1px solid rgb(236, 232, 232);
+  box-shadow: 0 8px 15px #000;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.form-header {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+  height: 70px;
+  color: #fff;
+  background-color: rgb(5, 4, 4);
+  border: 1px solid #fff;
+  border-radius: 0 0 20px 20px;
+}
+
+.title {
+  position: relative;
+}
+
+.title-login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+}
+
+.login-form {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+}
+
+.input-box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  color: #fff;
+}
+
+.input-field {
+  width: 100%;
+  height: 55px;
+  font-size: 16px;
+  background: transparent;
+  padding: 0 20px;
+  border: 1px solid #fff;
+  border-radius: 30px;
+  outline: none;
+  color: #fff;
+}
+
+.input-field:focus {
+  border: 1px solid rgb(97, 93, 93);
+}
+.input-field:focus ~ .label,
+.input-field:valid ~ .label {
+  top: 0;
+  font-size: 14px;
+  padding: 0 10px;
+  background-color: rgb(18, 17, 17);
+}
+.input-field:valid ~ .label {
+  color: #4f4c4c;
+}
+.label {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  color: #fff;
+  cursor: text;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 25px;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: rgb(252, 252, 252);
+}
+
+.btn-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 30px;
+  background-color: rgb(18, 17, 17);
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  gap: 15px;
+}
+
+.btn-submit i {
+  font-size: 25px;
+}
+
+.switch-form span {
+  display: flex;
+  justify-content: space-around;
+  color: #4f4c4c;
+}

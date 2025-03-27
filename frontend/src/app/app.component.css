@@ -1,0 +1,11 @@
+/* Contenitore principale */
+.index {
+  min-height: 76.8vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  box-sizing: border-box;
+  margin: 50px;
+  padding: 0;
+}
