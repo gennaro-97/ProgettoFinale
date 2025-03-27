@@ -136,7 +136,7 @@ Se desideri contribuire al progetto, segui questi passaggi:
 
 ### Gennaro Tella:
 - [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gennaro-tella/)  
-- [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com/NotSoupCarry/VisualizeUrSelf)
+- [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com/gennaro-97)
 
 ---
 
