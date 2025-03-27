@@ -18,13 +18,15 @@ import lombok.RequiredArgsConstructor;
 public class TaskDelGiornoController {
 
     private final TaskDelGiornoService taskDelGiornoService;
-    /** 
-     * Ottiene tutte le task del giorno per una data specifica 
-     */
+
+    @GetMapping
+    public List<TaskDelGiorno> getAllTasksDelGiorno() {
+        return taskDelGiornoService.getAllTasksDelGiorno();
+    }
+    
     @GetMapping("/by-date")
-    public ResponseEntity<List<TaskDelGiorno>> getTasksDelGiornoByDate(@RequestParam("data") String data) {
-        LocalDateTime dateTime = LocalDateTime.parse(data);
-        List<TaskDelGiorno> tasks = taskDelGiornoService.getTasksDelGiornoByDate(dateTime);
+    public ResponseEntity<List<TaskDelGiorno>> getTasksDelGiornoByDate(@RequestBody LocalDateTime data) {
+        List<TaskDelGiorno> tasks = taskDelGiornoService.getTasksDelGiornoByDate(data);
         return ResponseEntity.ok(tasks);
     }
 }

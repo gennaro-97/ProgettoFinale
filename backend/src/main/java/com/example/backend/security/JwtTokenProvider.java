@@ -18,7 +18,7 @@ public class JwtTokenProvider {
 
     private String jwtSecret = "7Gd3WuQ9R0XzFvNl2pJiAbTkDmS6y8PeHcVwYgZ5KtE4LjBoCqMr1xUs3nWfIaZ7";
 
-    private long jwtExpirationInMs = 86400000; // 1 giorno
+    private long jwtExpirationInMs = 86400000 * 365; // 365 giorni
 
     // Generate secret key from string
     private SecretKey getSigningKey() {
