@@ -1,4 +1,4 @@
-<div class="register-container">
+<!-- <div class="register-container">
   <h2>Registrazione</h2>
   <form class="register-form" (submit)="register($event)">
     <div class="form-group">
@@ -42,5 +42,65 @@
     <button type="submit" class="submit-button">Registrati</button>
 
     <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </form>
+</div> -->
+
+<div class="wrapper">
+  <div class="form-header">
+    <div class="titles">
+      <div class="title-login">Register</div>
+    </div>
+  </div>
+  <form class="login-form" (submit)="register($event)">
+    <div class="input-box">
+      <input
+        type="text"
+        class="input-field"
+        [(ngModel)]="username"
+        id="username"
+        minlength="3"
+        required
+      />
+      <label for="username" class="label">username</label>
+      <i class="bx bx-user-circle icon"></i>
+    </div>
+
+    <div class="input-box">
+      <input
+        class="input-field"
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="email"
+        required
+      />
+      <label for="email" class="label">email</label>
+      <i class="bx bxs-envelope icon"></i>
+    </div>
+
+    <div class="input-box">
+      <input
+        type="password"
+        class="input-field"
+        [(ngModel)]="password"
+        id="password"
+        minlength="6"
+        required
+      />
+      <label for="password" class="label">password</label>
+      <i class="bx bxs-lock-alt icon"></i>
+    </div>
+
+    <div class="form-cols">
+      <div class="col-1"></div>
+    </div>
+    <div class="input-box">
+      <button class="btn-submit" id="signInBtn" type="submit">
+        sign in <i class="bx bx-log-in-circle"></i>
+      </button>
+    </div>
+    <div class="switch-form">
+      <span>Sei già registrato? <a href="/login">Login</a></span>
+    </div>
   </form>
 </div>

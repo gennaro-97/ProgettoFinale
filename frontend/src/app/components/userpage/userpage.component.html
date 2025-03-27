@@ -3,14 +3,27 @@
   <div class="left-column">
     <h1>Gestione Task</h1>
 
+    <!-- Immagini condizionali basate sul progresso -->
+    <div class="progress-images">
+      <img
+        *ngIf="progressImage"
+        [src]="progressImage"
+        alt="Immagine progresso"
+      />
+    </div>
+
     <!-- Barra di progresso -->
     <section class="progress-bar-section">
       <h2>Progresso</h2>
       <div class="progress-bar">
-        <div class="progress-bar-fill" [style.width]="progressPercentage + '%'">
-        </div>
+        <div
+          class="progress-bar-fill"
+          [style.width]="progressPercentage + '%'"
+        ></div>
       </div>
-      <p>{{ completedTasksCount }} completate su {{ totalTasksCount }} totali</p>
+      <p>
+        {{ completedTasksCount }} completate su {{ totalTasksCount }} totali
+      </p>
     </section>
 
     <!-- Sezione per aggiungere una nuova task -->
@@ -19,31 +32,65 @@
       <form (ngSubmit)="addTask()">
         <div class="form-group">
           <label for="titolo">Titolo:</label>
-          <input id="titolo" type="text" [(ngModel)]="newTask.titolo" name="titolo"
-            placeholder="Inserisci il titolo della task" required />
+          <input
+            id="titolo"
+            type="text"
+            [(ngModel)]="newTask.titolo"
+            name="titolo"
+            placeholder="Inserisci il titolo della task"
+            required
+          />
         </div>
 
         <div class="form-group">
           <label for="descrizione">Descrizione:</label>
-          <textarea id="descrizione" [(ngModel)]="newTask.descrizione" name="descrizione"
-            placeholder="Inserisci una descrizione" rows="3" required></textarea>
+          <textarea
+            id="descrizione"
+            [(ngModel)]="newTask.descrizione"
+            name="descrizione"
+            placeholder="Inserisci una descrizione"
+            rows="3"
+            required
+          ></textarea>
         </div>
 
         <div class="form-group">
           <label for="dataInizio">Data Inizio:</label>
-          <input id="dataInizio" type="date" [(ngModel)]="newTask.dataInizio" name="dataInizio" required />
+          <input
+            id="dataInizio"
+            type="date"
+            [(ngModel)]="newTask.dataInizio"
+            name="dataInizio"
+            required
+          />
         </div>
 
         <div class="form-group">
           <label for="dataFine">Data Fine:</label>
-          <input id="dataFine" type="date" [(ngModel)]="newTask.dataFine" name="dataFine" required />
+          <input
+            id="dataFine"
+            type="date"
+            [(ngModel)]="newTask.dataFine"
+            name="dataFine"
+            required
+          />
         </div>
 
         <div class="form-group">
           <label for="tipoLavoro">Tipo di Lavoro:</label>
-          <select id="tipoLavoro" [(ngModel)]="newTask.tipoLavoro" name="tipoLavoro" required>
-            <option value="" disabled selected>Seleziona il tipo di lavoro</option>
-            <option *ngFor="let tipo of TipoLavoro | keyvalue" [value]="tipo.key">
+          <select
+            id="tipoLavoro"
+            [(ngModel)]="newTask.tipoLavoro"
+            name="tipoLavoro"
+            required
+          >
+            <option value="" disabled selected>
+              Seleziona il tipo di lavoro
+            </option>
+            <option
+              *ngFor="let tipo of TipoLavoro | keyvalue"
+              [value]="tipo.key"
+            >
               {{ tipo.value }}
             </option>
           </select>
@@ -61,7 +108,9 @@
           <h3>{{ task.titolo }}</h3>
           <p>{{ task.descrizione }}</p>
           <!-- Pulsante Elimina -->
-        <button class="delete-task" (click)="deleteTask(task.id!)">Elimina</button>
+          <button class="delete-task" (click)="deleteTask(task.id!)">
+            Elimina
+          </button>
         </div>
       </section>
 
@@ -71,7 +120,9 @@
           <h3>{{ task.titolo }}</h3>
           <p>{{ task.descrizione }}</p>
           <!-- Pulsante Elimina -->
-        <button class="delete-task" (click)="deleteTask(task.id!)">Elimina</button>
+          <button class="delete-task" (click)="deleteTask(task.id!)">
+            Elimina
+          </button>
         </div>
       </section>
     </div>
@@ -82,8 +133,12 @@
     <section class="tasks-section">
       <h2>Le tue Task</h2>
       <div *ngFor="let task of tasks" class="task-item">
-        <h2 *ngIf="task.risolta === true" style="color: green;"><strong>Completato</strong></h2>
-        <h2 *ngIf="task.risolta === false" style="color: red;"><strong>Fallita</strong></h2>
+        <h2 *ngIf="task.risolta === true" style="color: green">
+          <strong>Completato</strong>
+        </h2>
+        <h2 *ngIf="task.risolta === false" style="color: red">
+          <strong>Fallita</strong>
+        </h2>
         <h2 *ngIf="task.risolta === null"><strong>In Corso</strong></h2>
         <h3>{{ task.titolo }}</h3>
         <p>{{ task.descrizione }}</p>
@@ -95,18 +150,23 @@
         <!-- <button (click)="deleteTask(task.id!)">Elimina</button> -->
 
         <!-- Pulsante Completato -->
-        <button class="complete-task" *ngIf="task.risolta === null "(click)="toggleTaskResolved(task.id!, true)">Completato</button>
+        <button
+          class="complete-task"
+          *ngIf="task.risolta === null"
+          (click)="toggleTaskResolved(task.id!, true)"
+        >
+          Completato
+        </button>
 
         <!-- Pulsante Fallito -->
-        <button class="fail-task" *ngIf="task.risolta === null "(click)="toggleTaskResolved(task.id!, false)">Fallito</button>
+        <button
+          class="fail-task"
+          *ngIf="task.risolta === null"
+          (click)="toggleTaskResolved(task.id!, false)"
+        >
+          Fallito
+        </button>
       </div>
     </section>
   </div>
 </div>
-
-<!-- Immagini condizionali basate sul progresso -->
-<div class="progress-images">
-  <img *ngIf="progressImage" [src]="progressImage" alt="Immagine progresso" />
-</div>
-
-<app-datiutente class="datiutente-section"></app-datiutente>
