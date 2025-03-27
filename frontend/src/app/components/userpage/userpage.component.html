@@ -61,7 +61,7 @@
           <h3>{{ task.titolo }}</h3>
           <p>{{ task.descrizione }}</p>
           <!-- Pulsante Elimina -->
-        <button class="delete-task" (click)="deleteTask(task.id!)">Elimina</button>
+          <button class="delete-task" (click)="deleteTask(task.id!)">Elimina</button>
         </div>
       </section>
 
@@ -71,7 +71,7 @@
           <h3>{{ task.titolo }}</h3>
           <p>{{ task.descrizione }}</p>
           <!-- Pulsante Elimina -->
-        <button class="delete-task" (click)="deleteTask(task.id!)">Elimina</button>
+          <button class="delete-task" (click)="deleteTask(task.id!)">Elimina</button>
         </div>
       </section>
     </div>
@@ -91,18 +91,36 @@
         <p><strong>Fine:</strong> {{ task.dataFine }}</p>
         <p><strong>Tipo:</strong> {{ task.tipoLavoro }}</p>
 
-        <!-- Pulsante Elimina -->
-        <!-- <button (click)="deleteTask(task.id!)">Elimina</button> -->
-
         <!-- Pulsante Completato -->
-        <button class="complete-task" *ngIf="task.risolta === null "(click)="toggleTaskResolved(task.id!, true)">Completato</button>
+        <button class="complete-task" *ngIf="task.risolta === null "
+          (click)="toggleTaskResolved(task.id!, true)">Completato</button>
 
         <!-- Pulsante Fallito -->
-        <button class="fail-task" *ngIf="task.risolta === null "(click)="toggleTaskResolved(task.id!, false)">Fallito</button>
+        <button class="fail-task" *ngIf="task.risolta === null "
+          (click)="toggleTaskResolved(task.id!, false)">Fallito</button>
       </div>
     </section>
   </div>
 </div>
+
+<div class="filter-section">
+  <label for="filterDate">Cerca per data di inizio:</label>
+  <input id="filterDate" type="date" [(ngModel)]="searchDate" placeholder="Inserisci una data" />
+  <button (click)="filteredTasks = getTasksByDate(searchDate)">Cerca</button>
+</div>
+
+<div *ngIf="filteredTasks.length > 0; else noTasks" class="task-list">
+  <div *ngFor="let task of filteredTasks" class="task-item">
+    <h3>{{ task.titolo }}</h3>
+    <p>{{ task.descrizione }}</p>
+    <p><strong>Inizio:</strong> {{ task.dataInizio }}</p>
+    <p><strong>Fine:</strong> {{ task.dataFine }}</p>
+  </div>
+</div>
+
+<ng-template #noTasks>
+  <p>Non ci sono task per questa data.</p>
+</ng-template>
 
 <!-- Immagini condizionali basate sul progresso -->
 <div class="progress-images">

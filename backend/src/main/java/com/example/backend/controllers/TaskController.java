@@ -1,5 +1,6 @@
 package com.example.backend.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -60,5 +61,6 @@ public class TaskController {
     public List<Task> getUnresolvedTasks(@RequestParam Long utenteId) {
         return taskService.getUnresolvedTasksByUtenteId(utenteId);
     }
+
 }
 
