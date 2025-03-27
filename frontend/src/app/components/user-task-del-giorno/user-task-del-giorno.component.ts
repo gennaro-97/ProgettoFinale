@@ -24,7 +24,6 @@ export class UserTaskDelGiornoComponent implements OnInit {
 
   constructor(
     private taskDelGiornoService: TaskDelGiornoService,
-    private userTaskService: UserTaskDelGiornoService,
     private authService: AuthService
   ) { }
 
@@ -32,44 +31,11 @@ export class UserTaskDelGiornoComponent implements OnInit {
 
     this.userId = this.authService.getIdUser(); // Ottieni l'ID dell'utente loggato
     this.loadTasksForToday(); // Carica le task disponibili per oggi
-    this.loadUserTasks(); // Carica le task assegnate all'utente
-  }
-
-  /** Carica tutte le task assegnate all'utente */
-  loadUserTasks(): void {
-    if (this.userId) {
-      this.userTaskService.getTasksByUtente(this.userId).subscribe({
-        next: (tasks) => this.userTasks = tasks,
-        error: (error) => this.errorMessage = 'Errore nel recupero delle task utente'
-      });
-    }
   }
 
   /** Carica tutte le task disponibili per il giorno corrente */
   loadTasksForToday(): void {
     this.tasks$ = this.taskDelGiornoService.getAllTasksDelGiorno();
   }
-
-  /** Assegna una task all'utente */
-  assignTask(task: TaskDelGiorno): void {
-    // Creiamo l'oggetto UtenteTasksDelGiorno con i dati necessari
-    const userTask: UtenteTasksDelGiorno = {
-      utente: { id: this.userId },  // Utente con l'id dell'utente corrente
-      taskDelGiorno: { id: task.id },  // Task con l'id della task che stiamo assegnando
-      completata: false  // Task non completata di default
-    };
-
-    console.log(userTask);
-
-    // Chiamata al servizio per assegnare la task all'utente
-    this.userTaskService.assignTaskToUtente(userTask).subscribe({
-      next: () => {
-        // Puoi chiamare una funzione per aggiornare la lista delle task dell'utente o fare altro.
-        this.loadUserTasks(); // Esempio per ricaricare le task assegnate all'utente.
-      },
-      error: () => this.errorMessage = 'Errore nell\'assegnazione della task'
-    });
-  }
-
 
 }
