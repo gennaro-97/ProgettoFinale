@@ -127,9 +127,14 @@ Se desideri contribuire al progetto, segui questi passaggi:
 
 - 
 - Giuseppe Conza:
-Email: conzagiuseppee@gmail.com
+Email: conzagiuseppee@gmail.com <br>
 https://github.com/NotSoupCarry
 https://www.linkedin.com/in/giuseppeconza/
 
 - Gennaro Tella:
 https://www.linkedin.com/in/gennaro-tella/
+https://github.com/NotSoupCarry/VisualizeUrSelf
+
+- Luca Manzo
+https://www.linkedin.com/in/luca-manzo-5b16602a8/
+https://github.com/Luca16-95
