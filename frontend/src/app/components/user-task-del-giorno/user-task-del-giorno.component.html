@@ -9,18 +9,6 @@
       <strong>{{ task.titolo }}</strong> - {{ task.giornoDellaTask | date: 'short' }}
     </div>
     <div>{{ task.descrizione }}</div>
-    <button (click)="assignTask(task)">Accetta</button>
   </li>
 </ul>
 
-<!-- Mostra le task assegnate all'utente -->
-<h2>Le Tue Task</h2>
-<ul>
-  <li *ngFor="let userTask of userTasks">
-    <div>
-      <strong>{{ userTask.taskDelGiorno.titolo }}</strong> - {{ userTask.taskDelGiorno.giornoDellaTask | date: 'short' }}
-    </div>
-    <div>{{ userTask.taskDelGiorno.descrizione }}</div>
-    <div>Status: {{ userTask.completata ? 'Completata' : 'Non completata' }}</div>
-  </li>
-</ul>
