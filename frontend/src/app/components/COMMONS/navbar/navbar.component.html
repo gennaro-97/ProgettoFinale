@@ -1,11 +1,11 @@
-<div *ngIf="isAuthenticated"> <!-- Mostra la navbar solo se l'utente è autenticato -->
+<!-- <div *ngIf="isAuthenticated"> 
   <div class="navbar">
-    <!-- Logo che apre la sidebar -->
+   
     <div class="logo" (click)="toggleSidebar()">
       <img src="favicon.ico" alt="Logo" class="logo-img" />
     </div>
 
-    <!-- Sidebar -->
+    
     <div class="sidebar" [class.open]="isSidebarOpen">
       <ul>
         <li><button (click)="isSidebarOpen = false">X</button></li>
@@ -16,6 +16,42 @@
         <li *ngIf="isRoleAdmin"><button (click)="onTasksDelGiornoClick()">Gestisci Tasks del Giorno</button></li>
 
         <li><button (click)="onLogoutClick()">Logout</button></li>
+      </ul>
+    </div>
+  </div>
+</div>  -->
+
+<div *ngIf="isAuthenticated">
+  <div class="navbar">
+    <div class="logo" (click)="toggleSidebar()">
+      <img src="favicon.ico" alt="Logo" class="logo-img" />
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" [class.open]="isSidebarOpen">
+      <ul>
+        <li>
+          <button class="btn" (click)="isSidebarOpen = false">X</button>
+        </li>
+        <li *ngIf="isRoleUser">
+          <button class="btn" (click)="onProfileClick()">Profilo</button>
+        </li>
+        <li *ngIf="isRoleUser">
+          <button class="btn">Tasks Del Giorno</button>
+        </li>
+        <li *ngIf="isRoleUser">
+          <button class="btn" (click)="onTasksClick()">Le Tue Tasks</button>
+        </li>
+
+        <li *ngIf="isRoleAdmin">
+          <button class="btn" (click)="onTasksDelGiornoClick()">
+            Gestisci Tasks del Giorno
+          </button>
+        </li>
+
+        <li>
+          <button class="btn" (click)="onLogoutClick()">Logout</button>
+        </li>
       </ul>
     </div>
   </div>
