@@ -114,11 +114,8 @@ Se desideri contribuire al progetto, segui questi passaggi:
    ```
 5. Crea una pull request.
 
-## Licenza
-
-Distribuito sotto la Licenza MIT. Vedi il file [LICENSE](LICENSE) per ulteriori dettagli.
 
 ## Contatti
 
-- Email: tuo-email@example.com
-- Sito Web: https://tuo-sito-web.com
+- Email: conzagiuseppee@gmail.com
+- Github: https://github.com/NotSoupCarry
