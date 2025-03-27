@@ -7,7 +7,6 @@ import { TipoLavoro } from '../../enums/TipoLavoro';
 import { firstValueFrom } from 'rxjs';
 import dayjs from 'dayjs';
 import { AuthService } from '../../services/auth.service';
-import { DatiUtente } from '../../models/DatiUtente';
 import { DatiutenteComponent } from '../datiutente/datiutente.component';
 
 @Component({
@@ -30,10 +29,10 @@ export class UserpageComponent implements OnInit {
   }; // Assegna l'utenteId alla task
   TipoLavoro = TipoLavoro; // Per accedere all'enum nel template
 
-  get progressPercentage(): string {
-    const resolvedTasks = this.tasks.filter(task => task.risolta).length;
+  get progressPercentage(): number {
+    const resolvedTasks = this.tasks.filter(task => task.risolta === true).length;
     const totalTasks = this.tasks.length;
-    return totalTasks > 0 ? (resolvedTasks / totalTasks) * 100 + '%' : '0%';
+    return totalTasks > 0 ? Math.floor((resolvedTasks / totalTasks) * 100) : 0;
   }
 
   get completedTasksCount(): number {
@@ -45,11 +44,11 @@ export class UserpageComponent implements OnInit {
   }
 
   get resolvedTasks(): Task[] {
-    return this.tasks.filter(task => task.risolta);
+    return this.tasks.filter(task => task.risolta === true);
   }
 
   get unresolvedTasks(): Task[] {
-    return this.tasks.filter(task => !task.risolta);
+    return this.tasks.filter(task => task.risolta === false);
   }
 
   constructor(private taskService: TaskService, private authService: AuthService) {}
@@ -58,7 +57,16 @@ export class UserpageComponent implements OnInit {
     this.utenteId = this.authService.getIdUser() ?? undefined; // Ottieni l'ID dell'utente dal servizio AuthService
     this.loadTask();
   }
-
+  get progressImage(): string {
+    if (this.progressPercentage >= 0 && this.progressPercentage < 50) {
+      return 'assets/images/gattino.jpg'; // Immagine per 0% <= progressPercentage < 50%
+    } else if (this.progressPercentage >= 50 && this.progressPercentage < 100) {
+      return 'assets/images/leoncino.jpg'; // Immagine per 50% <= progressPercentage < 100%
+    } else if (this.progressPercentage === 100) {
+      return 'assets/images/leone.avif'; // Immagine per progressPercentage === 100%
+    }
+    return ''; // Nessuna immagine se progressPercentage non è valido
+  }
 
 /** Crea una nuova task */
 async addTask(): Promise<void> {
@@ -124,37 +132,46 @@ async addTask(): Promise<void> {
   /** Imposta una task come risolta o non risolta */
   async toggleTaskResolved(id: number, resolved: boolean): Promise<void> {
     try {
-      await firstValueFrom(this.taskService.setTaskResolved(id, resolved)); // Aggiorna lo stato della task
-      this.loadTask();
+      // Aggiorna lo stato della task nel backend
+      await firstValueFrom(this.taskService.setTaskResolved(id, resolved));
+  
+      // Aggiorna lo stato della task localmente
+      const taskIndex = this.tasks.findIndex(task => task.id === id);
+      if (taskIndex !== -1) {
+        this.tasks = [...this.tasks];;
+      }
+  
+      // Aggiorna le liste delle task risolte e non risolte
     } catch (error) {
       console.error('Errore nell\'aggiornamento della task:', error);
     }
+   this.loadTask(); // Ricarica la lista delle task
   }
 
   /** Ottiene tutte le task risolte */
-  async getResolvedTasks(): Promise<void> {
-    try {
-      if (this.utenteId !== undefined) {
-        this.tasks = await firstValueFrom(this.taskService.getResolvedTasks(this.utenteId));
-      } else {
-        console.error('Utente ID is undefined');
-      }
-    } catch (error) {
-      console.error('Errore nel recupero delle task risolte:', error);
-    }
-  }
+  // async getResolvedTasks(): Promise<void> {
+  //   try {
+  //     if (this.utenteId !== undefined) {
+  //       this.tasks = await firstValueFrom(this.taskService.getResolvedTasks(this.utenteId));
+  //     } else {
+  //       console.error('Utente ID is undefined');
+  //     }
+  //   } catch (error) {
+  //     console.error('Errore nel recupero delle task risolte:', error);
+  //   }
+  // }
 
   /** Ottiene tutte le task non risolte */
-  async getUnresolvedTasks(): Promise<void> {
-    try {
-      if (this.utenteId !== undefined) {
-        this.tasks = await firstValueFrom(this.taskService.getUnresolvedTasks(this.utenteId));
-      } else {
-        console.error('Utente ID is undefined');
-      }
-    } catch (error) {
-      console.error('Errore nel recupero delle task non risolte:', error);
-    }
-  }
+  // async getUnresolvedTasks(): Promise<void> {
+  //   try {
+  //     if (this.utenteId !== undefined) {
+  //       this.tasks = await firstValueFrom(this.taskService.getUnresolvedTasks(this.utenteId));
+  //     } else {
+  //       console.error('Utente ID is undefined');
+  //     }
+  //   } catch (error) {
+  //     console.error('Errore nel recupero delle task non risolte:', error);
+  //   }
+  // }
 }
 

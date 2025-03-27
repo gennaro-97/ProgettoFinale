@@ -47,18 +47,18 @@ export class TaskService {
   }
 
   /** Ottiene tutte le task risolte di un utente */
-  getResolvedTasks(utenteId: number): Observable<Task[]> {
-    const params = new HttpParams().set('utenteId', utenteId.toString());
-    const headers = this.getAuthHeaders(); // Aggiungi l'header Authorization
-    return this.http.get<Task[]>(`${this.apiUrl}/resolved`, { headers, params });
-  }
+  // getResolvedTasks(utenteId: number): Observable<Task[]> {
+  //   const params = new HttpParams().set('utenteId', utenteId.toString());
+  //   const headers = this.getAuthHeaders(); // Aggiungi l'header Authorization
+  //   return this.http.get<Task[]>(`${this.apiUrl}/resolved`, { headers, params });
+  // }
 
   /** Ottiene tutte le task non risolte di un utente */
-  getUnresolvedTasks(utenteId: number): Observable<Task[]> {
-    const params = new HttpParams().set('utenteId', utenteId.toString());
-    const headers = this.getAuthHeaders(); // Aggiungi l'header Authorization
-    return this.http.get<Task[]>(`${this.apiUrl}/unresolved`, { headers, params });
-  }
+  // getUnresolvedTasks(utenteId: number): Observable<Task[]> {
+  //   const params = new HttpParams().set('utenteId', utenteId.toString());
+  //   const headers = this.getAuthHeaders(); // Aggiungi l'header Authorization
+  //   return this.http.get<Task[]>(`${this.apiUrl}/unresolved`, { headers, params });
+  // }
 }
 
 
