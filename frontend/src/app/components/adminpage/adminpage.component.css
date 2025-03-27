@@ -30,6 +30,7 @@ body {
   padding: 40px 32px 32px;
   box-shadow: 0 8px 15px #000;
   transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  left: 32vw;
 }
 
 h2 {
@@ -62,8 +63,8 @@ select:focus {
   border: 1px solid rgb(97, 93, 93);
 }
 
-input:focus ~ .label,
-input:valid ~ .label {
+input:focus~.label,
+input:valid~.label {
   top: 0;
   font-size: 14px;
   padding: 0 10px;

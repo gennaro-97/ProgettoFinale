@@ -35,7 +35,7 @@ export class LoginComponent {
 
         // Controlla il ruolo dell'utente
         if (response.role === Ruolo.USER) {
-          this.router.navigate(['/userpage']); // Reindirizza alla userpage
+          this.router.navigate(['/firstLogin']); // Reindirizza alla userpage
         } else {
           this.router.navigate(['/adminpage']); // Reindirizza ad un'altra pagina per altri ruoli
         }

@@ -1,7 +1,7 @@
 export interface DatiUtente {
   id?: number;
-  peso: number;
-  altezza: number;
+  peso: number | null;
+  altezza: number | null;
   ibm?: number;
   idUtente?: number;
 }

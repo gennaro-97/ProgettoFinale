@@ -19,7 +19,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     
     // Se l'utente è autenticato e il ruolo è 'user', reindirizza alla userpage
     if (userRole === Ruolo.USER) {
-      router.navigate(['/userpage']);
+      router.navigate(['/firstLogin']);
       return false;
     }
   }

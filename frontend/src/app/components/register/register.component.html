@@ -1,80 +1,33 @@
-<!-- <div class="register-container">
-  <h2>Registrazione</h2>
-  <form class="register-form" (submit)="register($event)">
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        [(ngModel)]="username"
-        required
-        minlength="3"
-        placeholder="Inserisci il tuo username"
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        [(ngModel)]="email"
-        required
-        placeholder="Inserisci la tua email"
-      />
-    </div>
-
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        [(ngModel)]="password"
-        required
-        minlength="6"
-        placeholder="Inserisci la tua password"
-      />
-    </div>
-
-    <button type="submit" class="submit-button">Registrati</button>
-
-    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
-  </form>
-</div> -->
-
 <div class="wrapper">
   <div class="form-header">
     <div class="titles">
       <div class="title-login">Register</div>
     </div>
   </div>
-  <form class="login-form" (submit)="register($event)">
+  <form class="register-form" (submit)="register($event)">
     <div class="input-box">
       <input
         type="text"
         class="input-field"
         [(ngModel)]="username"
         id="username"
-        minlength="3"
+        name="username"
         required
       />
-      <label for="username" class="label">username</label>
+      <label for="username" class="label">Username</label>
       <i class="bx bx-user-circle icon"></i>
     </div>
 
     <div class="input-box">
       <input
         class="input-field"
-        type="email"
+        type="text"
         id="email"
         name="email"
         [(ngModel)]="email"
         required
       />
-      <label for="email" class="label">email</label>
+      <label for="email" class="label">Email</label>
       <i class="bx bxs-envelope icon"></i>
     </div>
 
@@ -84,23 +37,27 @@
         class="input-field"
         [(ngModel)]="password"
         id="password"
-        minlength="6"
+        name="password"
         required
       />
-      <label for="password" class="label">password</label>
+      <label for="password" class="label">Password</label>
       <i class="bx bxs-lock-alt icon"></i>
     </div>
 
     <div class="form-cols">
       <div class="col-1"></div>
     </div>
+
     <div class="input-box">
       <button class="btn-submit" id="signInBtn" type="submit">
-        sign in <i class="bx bx-log-in-circle"></i>
+        Registrati <i class="bx bx-log-in-circle"></i>
       </button>
     </div>
+
     <div class="switch-form">
       <span>Sei già registrato? <a href="/login">Login</a></span>
     </div>
+
+    <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
   </form>
 </div>

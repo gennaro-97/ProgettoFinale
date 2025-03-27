@@ -10,15 +10,26 @@ import { AuthService } from './auth.service';
 export class DatiutentiService {
   private apiUrl = 'http://localhost:8080/api/datiUtente';
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
-    private getAuthHeaders(): HttpHeaders {
-      const token = this.authService.getToken(); // Ottieni il token da AuthService
-      console.log(token);
-      return new HttpHeaders({
-        'Authorization': `Bearer ${token}` // Aggiungi l'header di autorizzazione
-      });
-    }
+  private getAuthHeaders(): HttpHeaders {
+    const token = this.authService.getToken(); // Ottieni il token da AuthService
+    console.log(token);
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}` // Aggiungi l'header di autorizzazione
+    });
+  }
+
+  /**
+ * Verifica se l'utente è al suo primo login.
+ * @param utenteId ID dell'utente.
+ * @returns Un Observable con la risposta boolean di checkFirstLogin.
+ */
+  checkFirstLogin(utenteId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/check-first-login/${utenteId}`, {
+      headers: this.getAuthHeaders(),
+    });
+  }
 
   /**
    * Salva i dati dell'utente.

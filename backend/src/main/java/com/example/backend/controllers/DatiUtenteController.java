@@ -27,6 +27,23 @@ public class DatiUtenteController {
 
     private final DatiUtenteService datiUtenteService;
 
+    @GetMapping("/{utenteId}")
+    public ResponseEntity<Optional<DatiUtente>> getDatiUtente(@PathVariable(name = "utenteId") Long utenteId) {
+        Optional<DatiUtente> datiUtente = datiUtenteService.getDatiUtente(utenteId);
+        return ResponseEntity.ok(datiUtente);
+    }
+
+    @GetMapping("/check-first-login/{utenteId}")
+    public ResponseEntity<Boolean> checkFirstLogin(@PathVariable Long utenteId) {
+        // Verifica se l'utente esiste nella tabella datiutente
+        Optional<DatiUtente> user = datiUtenteService.getDatiUtente(utenteId);
+        
+        if ( user.isEmpty()) {
+            return ResponseEntity.ok(true);
+        } else {
+            return ResponseEntity.ok(false);
+        }
+    }
 
     @PostMapping()
     public ResponseEntity<String> saveDatiUtente(@RequestBody DatiUtente datiUtente) {
@@ -42,13 +59,6 @@ public class DatiUtenteController {
 
         DatiUtente datiAggiornati = datiUtenteService.aggiornaDatiUtente(utenteId, peso, altezza);
         return ResponseEntity.ok(datiAggiornati);
-    }
-
-
-    @GetMapping("/{utenteId}")
-    public ResponseEntity<Optional<DatiUtente>> getDatiUtente(@PathVariable(name = "utenteId") Long utenteId) {
-        Optional<DatiUtente> datiUtente = datiUtenteService.getDatiUtente(utenteId);
-        return ResponseEntity.ok(datiUtente);
     }
 
 }
