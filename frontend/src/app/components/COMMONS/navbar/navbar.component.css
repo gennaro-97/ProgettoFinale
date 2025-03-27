@@ -1,4 +1,4 @@
-/* Impostazioni di base per il layout */
+/* 
 .navbar {
     display: flex;
     flex-direction: column;
@@ -11,7 +11,7 @@
   .logo {
     padding: 15px;
     cursor: pointer;
-    background-color: #121212; /* Sfondo scuro per il logo */
+    background-color: #121212; 
   }
   
   .logo-img {
@@ -20,21 +20,21 @@
     object-fit: cover;
   }
   
-  /* Sidebar che inizialmente è nascosta e si espande quando è aperta */
+  
   .sidebar {
     position: fixed;
     top: 0;
-    left: -250px; /* Nasconde la sidebar inizialmente */
+    left: -250px; 
     width: 250px;
     height: 100%;
-    background-color: #1d1c1c; /* Colore di sfondo della sidebar */
+    background-color: #1d1c1c; 
     color: white;
-    transition: all 0.3s ease; /* Animazione per l'apertura/chiusura */
+    transition: all 0.3s ease; 
     padding-top: 50px;
   }
   
   .sidebar.open {
-    left: 0; /* Quando la sidebar è aperta, si sposta a sinistra */
+    left: 0; 
   }
   
   .sidebar ul {
@@ -56,7 +56,77 @@
   }
   
   .sidebar ul li a:hover {
-    background-color: #333; /* Colore di hover */
+    background-color: #333; 
     border-radius: 5px;
-  }
-  
+  } */
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.logo {
+  padding: 15px;
+  cursor: pointer;
+  background-color: #121212;
+}
+
+.logo-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 250px;
+  height: 100%;
+  background-color: #090909;
+  color: white;
+  transition: all 0.3s ease;
+  padding-top: 50px;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  padding: 15px;
+  text-align: center;
+}
+
+.sidebar ul li button.btn {
+  color: #e4e0e0;
+  text-decoration: none;
+  font-size: 18px;
+  display: block;
+  width: 250px;
+  background-color: #141414;
+  border: 1px solid #e4e0e0;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.sidebar ul li button:hover {
+  color: #141414;
+  font-size: 18px;
+  display: block;
+  width: 250px;
+  background-color: #e8e2e2;
+  border: 1px solid #000000;
+  padding: 10px;
+  border-radius: 20px;
+}

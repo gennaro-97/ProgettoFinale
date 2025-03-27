@@ -1,11 +1,11 @@
 /* Contenitore principale */
 .index {
-    min-height: 76.8vh; /* Assicura che il contenitore occupi almeno l'altezza della finestra */
-    display: flex;
-    flex-direction: column; /* Disposizione verticale */
-    justify-content: center; /* Allinea il contenuto in alto */
-    align-items: stretch; /* Allinea gli elementi figli per occupare tutta la larghezza */
-    box-sizing: border-box; /* Include padding e bordi nella larghezza totale */
-    margin: 50px;
-    padding: 0;
-  }
+  min-height: 76.8vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  box-sizing: border-box;
+  margin: 50px;
+  padding: 0;
+}
