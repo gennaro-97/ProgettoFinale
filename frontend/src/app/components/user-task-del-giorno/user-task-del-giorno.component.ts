@@ -54,7 +54,7 @@ export class UserTaskDelGiornoComponent implements OnInit {
   assignTask(task: TaskDelGiorno): void {
     // Creiamo l'oggetto UtenteTasksDelGiorno con i dati necessari
     const userTask: UtenteTasksDelGiorno = {
-      utente: { id: this.userId },  // Utente con l'id dell'utente corrente
+      Utente: { id: this.userId },  // Utente con l'id dell'utente corrente
       taskDelGiorno: { id: task.id },  // Task con l'id della task che stiamo assegnando
       completata: false  // Task non completata di default
     };

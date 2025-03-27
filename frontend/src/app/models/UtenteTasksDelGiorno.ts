@@ -3,7 +3,7 @@ import { TaskDelGiorno } from './TaskDelGiorno';
 
 export interface UtenteTasksDelGiorno {
   id?: number | null;
-  utente: Utente;
+  Utente: Utente;
   taskDelGiorno: TaskDelGiorno;
   completata: boolean;
 }

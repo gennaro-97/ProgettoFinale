@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Component
 public class JwtTokenProvider {
 
-    private String jwtSecret = "7Gd3WuQ9R0XzFvNl2pJiAbTkDmS6y8PeHcVwYgZ5KtE4LjBoCqMr1xUs3nWfIaZ7";
+    private String jwtSecret = "T7n3WcR9Q3ZjLwV5FfN2nPr3MqXwBv1Xh8ZmYk9rI4UzWvGp3Xl7J5Gb1MvLsFz0";
 
     private long jwtExpirationInMs = 86400000 * 365; // 365 giorni
 
