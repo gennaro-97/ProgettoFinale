@@ -125,5 +125,11 @@ Se desideri contribuire al progetto, segui questi passaggi:
 
 ## Contatti
 
-- Email: conzagiuseppee@gmail.com
-- Github: https://github.com/NotSoupCarry
+- 
+- Giuseppe Conza:
+Email: conzagiuseppee@gmail.com
+https://github.com/NotSoupCarry
+https://www.linkedin.com/in/giuseppeconza/
+
+- Gennaro Tella:
+https://www.linkedin.com/in/gennaro-tella/
