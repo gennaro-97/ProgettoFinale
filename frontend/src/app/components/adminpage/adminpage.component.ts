@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TaskDelGiorno } from '../../models/TaskDelGiorno';
 import { TipoLavoro } from '../../enums/TipoLavoro';
 import { AdminService } from '../../services/admin.service';
+import dayjs from 'dayjs';
 
 @Component({
   selector: 'app-adminpage',
@@ -17,16 +18,24 @@ export class AdminPageComponent implements OnInit {
   newTask: TaskDelGiorno = {
     titolo: '',
     descrizione: '',
-    giornoDellaTask: new Date(),
+    giornoDellaTask: "",
     tipoLavoro: null // Assumi un valore predefinito
   };
   errorMessage: string = '';
 
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {
     this.loadTasks();
   }
+
+  // Funzione per formattare e restituire un oggetto Date
+private formatDateTime = (date: string, time: string = "08:00:00"): string => {
+      return dayjs(date).set('hour', parseInt(time.split(':')[0]))
+                        .set('minute', parseInt(time.split(':')[1]))
+                        .set('second', parseInt(time.split(':')[2]))
+                        .format('YYYY-MM-DDTHH:mm:ss'); // Formatta come data e orario
+    };
 
   /** Carica tutte le Task dal backend */
   loadTasks(): void {
@@ -38,14 +47,23 @@ export class AdminPageComponent implements OnInit {
 
   /** Aggiunge una nuova Task */
   addTask(): void {
-    this.adminService.addTaskDelGiorno(this.newTask).subscribe({
+    if (!this.newTask.titolo || !this.newTask.descrizione || !this.newTask.giornoDellaTask || !this.newTask.tipoLavoro) {
+      return;
+    }
+
+    const taskToSend = {
+      ...this.newTask,
+      giornoDellaTask: this.formatDateTime(this.newTask.giornoDellaTask.toString(), "08:00:00")
+    };
+
+    this.adminService.addTaskDelGiorno(taskToSend).subscribe({
       next: () => {
         this.loadTasks();
         this.newTask = {
           titolo: '',
           descrizione: '',
-          giornoDellaTask: new Date(),
-          tipoLavoro: null // Assumi un valore predefinito
+          giornoDellaTask: "",
+          tipoLavoro: null
         };
       },
       error: () => this.errorMessage = 'Errore durante l\'aggiunta della task'

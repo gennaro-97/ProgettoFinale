@@ -27,6 +27,7 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getTaskByUtenteId(utenteId));
     }
 
+    @SuppressWarnings("null")
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
         try {

@@ -5,7 +5,7 @@ export interface TaskDelGiorno {
   id?: number;
   titolo: string;
   descrizione: string;
-  giornoDellaTask: Date; 
+  giornoDellaTask: string; 
   tipoLavoro: TipoLavoro | null;
   utentiAssegnati?: UtenteTasksDelGiorno[];
 }
