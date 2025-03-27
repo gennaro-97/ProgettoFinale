@@ -129,19 +129,19 @@ Se desideri contribuire al progetto, segui questi passaggi:
 
 ### Giuseppe Conza:
 - **Email**: conzagiuseppee@gmail.com  
-- [GitHub](https://github.com/NotSoupCarry) [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com/NotSoupCarry)  
-- [LinkedIn](https://www.linkedin.com/in/giuseppeconza/) [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/giuseppeconza/)
+- [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com/NotSoupCarry)  
+- [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/giuseppeconza/)
 
 ---
 
 ### Gennaro Tella:
-- [LinkedIn](https://www.linkedin.com/in/gennaro-tella/) [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gennaro-tella/)  
-- [GitHub](https://github.com/NotSoupCarry/VisualizeUrSelf) [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com/NotSoupCarry/VisualizeUrSelf)
+- [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gennaro-tella/)  
+- [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com/NotSoupCarry/VisualizeUrSelf)
 
 ---
 
 ### Luca Manzo:
-- [LinkedIn](https://www.linkedin.com/in/luca-manzo-5b16602a8/) [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luca-manzo-5b16602a8/)  
-- [GitHub](https://github.com/Luca16-95) [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com/Luca16-95)
+- [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luca-manzo-5b16602a8/)  
+- [![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white)](https://github.com/Luca16-95)
 
 
