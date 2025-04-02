@@ -30,7 +30,7 @@ public class AuthController {
     private final JwtTokenProvider tokenProvider;
 
     @GetMapping("/{id}")
-    public Utente getUtente(@PathVariable Long id) {
+    public Utente getUtente(@PathVariable(name="id") Long id) {
         return utenteService.getUtenteById(id);
     }
 

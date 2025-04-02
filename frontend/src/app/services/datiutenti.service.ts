@@ -26,7 +26,7 @@ export class DatiutentiService {
  * @returns Un Observable con la risposta boolean di checkFirstLogin.
  */
   checkFirstLogin(utenteId: number): Observable<boolean> {
-    return this.http.get<boolean>(`${this.apiUrl}/check-first-login/${utenteId}`, {
+    return this.http.get<boolean>(`${this.apiUrl}/firstLogin/${utenteId}`, {
       headers: this.getAuthHeaders(),
     });
   }

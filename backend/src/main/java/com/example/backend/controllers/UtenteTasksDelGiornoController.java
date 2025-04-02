@@ -17,7 +17,7 @@ public class UtenteTasksDelGiornoController {
 
     // Ottieni tutte le task del giorno per un utente specifico
     @GetMapping("/{utenteId}")
-    public List<UtenteTasksDelGiorno> getTasksByUtenteId(@PathVariable Long utenteId) {
+    public List<UtenteTasksDelGiorno> getTasksByUtenteId(@PathVariable(name="utenteId") Long utenteId) {
         return utenteTasksDelGiornoService.getTasksByUtenteId(utenteId);
     }
 
@@ -29,7 +29,7 @@ public class UtenteTasksDelGiornoController {
 
     // Modifica lo stato di completamento della task del giorno
     @PutMapping("/{id}")
-    public UtenteTasksDelGiorno updateTaskCompletion(@PathVariable Long id, @RequestParam boolean completata) {
+    public UtenteTasksDelGiorno updateTaskCompletion(@PathVariable(name="id") Long id, @RequestParam boolean completata) {
         return utenteTasksDelGiornoService.updateTaskCompletion(id, completata);
     }
 }

@@ -29,7 +29,7 @@ public class AdminController {
 
     // Elimina una task del giorno per ID
     @DeleteMapping("/tasks-del-giorno/{id}")
-    public void deleteTaskDelGiorno(@PathVariable Long id) {
+    public void deleteTaskDelGiorno(@PathVariable(name="id") Long id) {
         taskDelGiornoService.deleteTaskDelGiornoById(id);
     }
 }

@@ -33,15 +33,15 @@ public class DatiUtenteController {
         return ResponseEntity.ok(datiUtente);
     }
 
-    @GetMapping("/check-first-login/{utenteId}")
-    public ResponseEntity<Boolean> checkFirstLogin(@PathVariable Long utenteId) {
+    @GetMapping("/firstLogin/{utenteId}")
+    public Boolean checkFirstLogin(@PathVariable(name = "utenteId") Long utenteId) {
         // Verifica se l'utente esiste nella tabella datiutente
         Optional<DatiUtente> user = datiUtenteService.getDatiUtente(utenteId);
         
         if ( user.isEmpty()) {
-            return ResponseEntity.ok(true);
+            return true;
         } else {
-            return ResponseEntity.ok(false);
+            return false;
         }
     }
 

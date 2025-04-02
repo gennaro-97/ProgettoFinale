@@ -21,7 +21,7 @@ public class TaskController {
 
     private final TaskService taskService;
     @GetMapping()
-    public ResponseEntity<?> getAll(@RequestParam Long utenteId) {
+    public ResponseEntity<?> getAll(@RequestParam(name="utenteId") Long utenteId) {
         if (utenteId == null) {
             return ResponseEntity.badRequest().body("Il parametro 'utenteId' è obbligatorio.");
         }
@@ -41,24 +41,24 @@ public class TaskController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteTask(@PathVariable Long id) {
+    public ResponseEntity<String> deleteTask(@PathVariable(name="id") Long id) {
         taskService.deleteTask(id);
         return ResponseEntity.ok("Task eliminato con successo!");
     }
 
     @PutMapping("/{id}/resolve")
-    public ResponseEntity<String> setTaskResolved(@PathVariable Long id, @RequestParam boolean resolved) {
+    public ResponseEntity<String> setTaskResolved(@PathVariable(name="id") Long id, @RequestParam(name="resolved") boolean resolved) {
         taskService.setTaskResolved(id, resolved);
         return ResponseEntity.ok("Task " + id + " aggiornata con stato: " + resolved);
     }
 
     @GetMapping("/resolved")
-    public List<Task> getResolvedTasks(@RequestParam Long utenteId) {
+    public List<Task> getResolvedTasks(@RequestParam(name="utenteId") Long utenteId) {
         return taskService.getResolvedTasksByUtenteId(utenteId);
     }
 
     @GetMapping("/unresolved")
-    public List<Task> getUnresolvedTasks(@RequestParam Long utenteId) {
+    public List<Task> getUnresolvedTasks(@RequestParam(name="utenteId") Long utenteId) {
         return taskService.getUnresolvedTasksByUtenteId(utenteId);
     }
 

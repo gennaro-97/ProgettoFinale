@@ -15,7 +15,7 @@ public class UtenteController {
     private final UtenteService utenteService;
 
     @GetMapping("/{id}")
-    public Utente getUtente(@PathVariable Long id) {
+    public Utente getUtente(@PathVariable(name="id") Long id) {
         return utenteService.getUtenteById(id);
     }
 }
