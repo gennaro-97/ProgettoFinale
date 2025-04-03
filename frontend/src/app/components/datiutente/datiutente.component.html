@@ -5,30 +5,31 @@
   <form (ngSubmit)="showAddButton ? saveDatiUtente() : aggiornaDatiUtente()">
     <div class="form-group">
       <label for="peso">Peso (kg):</label>
-      <input
-        id="peso"
-        type="number"
-        [(ngModel)]="datiUtente.peso"
-        name="peso"
-        required
-        min="1"
-        step="0.1"
-      />
+      <input id="peso" type="number" [(ngModel)]="datiUtente.peso" name="peso" required min="1" step="0.1" />
     </div>
 
     <div class="form-group">
       <label for="altezza">Altezza (m):</label>
-      <input
-        id="altezza"
-        type="number"
-        [(ngModel)]="datiUtente.altezza"
-        name="altezza"
-        required
-        min="0.1"
-        step="0.01"
-      />
+      <input id="altezza" type="number" [(ngModel)]="datiUtente.altezza" name="altezza" required min="0.1"
+        step="0.01" />
     </div>
 
+    <!-- Campo Anno di Nascita -->
+    <div class="form-group" *ngIf="showAddButton">
+      <label for="annoNascita">Anno di nascita:</label>
+      <input id="annoNascita" type="number" [(ngModel)]="datiUtente.annoNascita" name="annoNascita" required min="1900"
+        max="2025" />
+    </div>
+
+    <!-- Campo Sesso -->
+    <div class="form-group" *ngIf="showAddButton">
+      <label for="sesso">Sesso:</label>
+      <select id="sesso" [(ngModel)]="datiUtente.sesso" name="sesso" required>
+        <option value="MASCHIO">Uomo</option>
+        <option value="FEMMINA">Donna</option>
+      </select>
+    </div>
+    
     <button type="submit" class="btn-save">
       {{ showAddButton ? 'Aggiungi Dati' : 'Aggiorna Dati' }}
     </button>
@@ -36,9 +37,11 @@
 
   <!-- Mostra i dati salvati -->
   <div *ngIf="!showAddButton" class="dati-salvati">
+    <p><strong>Sesso:</strong> {{ datiUtente.sesso }}</p>
+    <p><strong>Anno di nascita:</strong> {{ datiUtente.annoNascita }}</p>
     <p><strong>Peso:</strong> {{ datiUtente.peso }} kg</p>
     <p><strong>Altezza:</strong> {{ datiUtente.altezza }} m</p>
     <p><strong>Indice di Massa Corporea (IMC):</strong> {{ datiUtente.ibm | number: '1.2-2' }}</p>
+    <p><strong>Metabolismo Basale (BMR):</strong>{{datiUtente.bmr | number: '1.2-2'}}</p>
   </div>
 </div>
-

@@ -53,9 +53,9 @@ public class DatiUtenteController {
 
     @PutMapping("/{utenteId}/aggiorna")
     public ResponseEntity<DatiUtente> aggiornaDatiUtente(
-            @PathVariable Long utenteId,
-            @RequestParam double peso,
-            @RequestParam double altezza) {
+            @PathVariable(name = "utenteId") Long utenteId,
+            @RequestParam(name = "peso") double peso,
+            @RequestParam(name = "altezza") double altezza) {
 
         DatiUtente datiAggiornati = datiUtenteService.aggiornaDatiUtente(utenteId, peso, altezza);
         return ResponseEntity.ok(datiAggiornati);

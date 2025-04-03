@@ -17,7 +17,9 @@ import { DatiUtente } from '../../models/DatiUtente';
 export class DatiutenteComponent implements OnInit {
   datiUtente: DatiUtente = {
     peso: 0, // Imposta un valore predefinito invece di null
-    altezza: 0
+    altezza: 0,
+    sesso: undefined,
+    annoNascita: 0,
   };
 
   utenteId: number | undefined = undefined;
@@ -61,6 +63,8 @@ export class DatiutenteComponent implements OnInit {
       const datiUtentePayload = {
         peso: this.datiUtente.peso,
         altezza: this.datiUtente.altezza,
+        sesso: this.datiUtente.sesso,
+        annoNascita: this.datiUtente.annoNascita,
         utente: {
           id: this.utenteId, // Associa l'utente autenticato
         },
@@ -97,9 +101,6 @@ export class DatiutenteComponent implements OnInit {
         )
       );
       this.datiUtente = datiAggiornati;
-
-
-
     } catch (error) {
     }
   }
@@ -124,4 +125,6 @@ export class DatiutenteComponent implements OnInit {
       console.error('Errore nel caricamento dei dati utente:', error);
     }
   }
+
+
 }

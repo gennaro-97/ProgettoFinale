@@ -7,12 +7,11 @@ import { TipoLavoro } from '../../enums/TipoLavoro';
 import { firstValueFrom } from 'rxjs';
 import dayjs from 'dayjs';
 import { AuthService } from '../../services/auth.service';
-import { DatiutenteComponent } from '../datiutente/datiutente.component';
 
 @Component({
   selector: 'app-userpage',
   standalone: true,
-  imports: [FormsModule, CommonModule, DatiutenteComponent],
+  imports: [FormsModule, CommonModule],
   templateUrl: './userpage.component.html',
   styleUrls: ['./userpage.component.css'],
 })
